@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoGeneratorSettingsState">
+    <option name="ignoredFields">
+      <set>
+        <option value="" />
+      </set>
+    </option>
+    <option name="moduleName" value="WattBook" />
+    <option name="moduleNameToSettings">
+      <map>
+        <entry key="WattBook">
+          <value>
+            <ModuleSettings>
+              <option name="controllerPackageName" value="com.example.wattbook.Controller" />
+              <option name="controllerParentDirectory" value="$PROJECT_DIR$/src/main/java" />
+              <option name="dtoParentDirectory" value="$PROJECT_DIR$/src/main/java" />
+              <option name="entityPackageName" value="com.example.wattbook.Entity" />
+              <option name="entityParentDirectory" value="$PROJECT_DIR$/src/main/java" />
+              <option name="generateController" value="true" />
+              <option name="mapperXmlParentDirectory" value="C:\Users\moip1\Documents\WattBook\src\main\resources" />
+              <option name="repositoryPackageName" value="com.example.wattbook.Repository" />
+              <option name="repositoryParentDirectory" value="$PROJECT_DIR$/src/main/java" />
+              <option name="serviceParentDirectory" value="$PROJECT_DIR$/src/main/java" />
+              <option name="voParentDirectory" value="$PROJECT_DIR$/src/main/java" />
+            </ModuleSettings>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="useJakartaEE" value="true" />
+  </component>
+  <component name="DatabaseSettingsState">
+    <option name="language" value="es-ES" />
+  </component>
+</project>
