@@ -4,12 +4,11 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 @Data
 @Entity
-@Table(name = "comentarios")
-public class Comentarios implements Serializable {
+@Table(name = "chat_usuarios")
+public class ChatUsuarios implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -22,13 +21,7 @@ public class Comentarios implements Serializable {
     private Usuario usuarioId;
 
     @ManyToOne
-    @JoinColumn(name = "libro_id", nullable = false)
-    private Libros libroId;
-
-    @Column(name = "comentario", nullable = false)
-    private String comentario;
-
-    @Column(name = "fecha", nullable = false)
-    private Date fecha;
+    @JoinColumn(name = "chat_id", nullable = false)
+    private Chat chatId;
 
 }

@@ -1,38 +1,41 @@
 package com.example.wattbook.Entity;
 
+import com.example.wattbook.Enums.Genero;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDate;
+import java.io.Serializable;
+import java.sql.Date;
 
 @Data
 @Entity
 @Table(name = "libros")
-public class Libros {
+public class Libros implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(nullable = false, length = 150)
+    @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @Column
+    @Column(name = "descripcion", nullable = false)
     private String descripcion;
 
-    @Column(nullable = false, length = 50)
-    private String generos;
-
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String contenido;
+    private Genero generos;
+
+    @Column(name = "fecha_publicacion", nullable = false)
+    private Date fechaPublicacion;
+
+    @Column(name = "imagen", nullable = false)
+    private String imagen;
 
     @ManyToOne
-    @JoinColumn(name = "autor", nullable = false)
-    private Usuario autor;
+    @JoinColumn(name = "autor_id", nullable = false)
+    private Usuario autorId;
 
-    @Column(nullable = false)
-    private LocalDate fecha;
-
-    @Column(length = 255)
-    private String imagen;
 }

@@ -1,33 +1,40 @@
 package com.example.wattbook.Entity;
 
+import com.example.wattbook.Enums.Genero;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.io.Serializable;
 
 @Data
 @Entity
 @Table(name = "perfil")
-public class Perfil {
+public class Perfil implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @Column
+    @Column(name = "descripcion", nullable = false)
     private String descripcion;
 
-    @Column(nullable = false, length = 100, unique = true)
-    private String correo;
+    @Column(name = "email", nullable = false)
+    private String email;
 
-    @Column(length = 255)
+    @Column(name = "imagen", nullable = false)
     private String imagen;
 
-    @Column(nullable = false, length = 50)
-    private String generos;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Genero generos;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
+
 }

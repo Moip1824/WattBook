@@ -3,20 +3,25 @@ package com.example.wattbook.Entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
 @Entity
 @Table(name = "seguidores")
-public class Seguidores {
+public class Seguidores implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "usuario1", nullable = false)
-    private Usuario usuario1;
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuarioId;
 
     @ManyToOne
-    @JoinColumn(name = "usuario2", nullable = false)
-    private Usuario usuario2;
+    @JoinColumn(name = "seguidor_id", nullable = false)
+    private Usuario seguidorId;
+
 }

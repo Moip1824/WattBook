@@ -3,28 +3,28 @@ package com.example.wattbook.Entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.io.Serializable;
 
 @Data
 @Entity
 @Table(name = "votos")
-public class Votos {
+public class Votos implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "usuario", nullable = false)
-    private Usuario usuario;
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuarioId;
 
     @ManyToOne
-    @JoinColumn(name = "libro", nullable = false)
-    private Libros libro;
+    @JoinColumn(name = "libro_id", nullable = false)
+    private Libros libroId;
 
-    @Column(nullable = false)
+    @Column(name = "tipo_voto")
     private Boolean tipoVoto;
 
-    @Column(nullable = false)
-    private LocalDateTime fecha;
 }

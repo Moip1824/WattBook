@@ -1,54 +1,30 @@
 package com.example.wattbook.Entity;
 
+import com.example.wattbook.Enums.Rol;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.List;
+import java.io.Serializable;
 
 @Data
 @Entity
 @Table(name = "usuario")
-public class Usuario {
+public class Usuario implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(nullable = false, unique = true, length = 50)
-    private String nomUsu;
+    @Column(name = "nombreusuario", nullable = false)
+    private String nombreusuario;
 
-    @Column(nullable = false, length = 255)
+    @Column(name = "contrasena", nullable = false)
     private String contrasena;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 10)
+    @Column(nullable = false)
     private Rol rol;
 
-    public enum Rol {
-        ADMIN, USUARIO
-    }
-
-    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private Perfil perfil;
-
-    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL)
-    private List<Libros> libros;
-
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private List<Comentarios> comentarios;
-
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private List<Chat> chats;
-
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private List<Votos> votos;
-
-    @OneToMany(mappedBy = "usuario1", cascade = CascadeType.ALL)
-    private List<Seguidores> seguidores1;
-
-    @OneToMany(mappedBy = "usuario2", cascade = CascadeType.ALL)
-    private List<Seguidores> seguidores2;
-
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private List<UsuariosBaneados> usuariosBaneados;
 }

@@ -3,19 +3,28 @@ package com.example.wattbook.Entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.io.Serializable;
+import java.sql.Date;
+
 @Data
 @Entity
 @Table(name = "usuarios_baneados")
-public class UsuariosBaneados {
+public class UsuariosBaneados implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_usuario", nullable = false)
-    private Usuario usuario;
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuarioId;
 
-    @Column(nullable = false)
-    private String motivo;
+    @Column(name = "fecha_baneo", nullable = false)
+    private Date fechaBaneo;
+
+    @Column(name = "motivo_baneo", nullable = false)
+    private String motivoBaneo;
+
 }
