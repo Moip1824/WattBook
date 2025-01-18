@@ -1,7 +1,7 @@
 package com.example.wattbook.security;
 
 import com.example.wattbook.Entity.Usuario;
-import com.example.wattbook.Repository.UsuarioService;
+import com.example.wattbook.Service.UsuarioService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -22,13 +22,7 @@ public class JWTService {
     @Value("${application.security.jwt.secret-key}")
     private String secretKey;
 
-    /**
-     * Método para generar token de acceso a través de los datos
-     * de un usuario
-     *
-     * @param usuario
-     * @return
-     */
+
     public String generateToken(Usuario usuario){
         TokenDataDTO tokenDataDTO = TokenDataDTO
                 .builder()

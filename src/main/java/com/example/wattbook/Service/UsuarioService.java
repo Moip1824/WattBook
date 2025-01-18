@@ -1,25 +1,27 @@
-package com.example.wattbook.Repository;
+package com.example.wattbook.Service;
 
 import com.example.wattbook.Dto.RegistroDTO;
 import com.example.wattbook.Entity.Perfil;
 import com.example.wattbook.Entity.Usuario;
+import com.example.wattbook.Repository.UsuarioRepository;
 import com.example.wattbook.security.JWTService;
 import com.example.wattbook.Enums.Rol;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.HashSet;
-
+@Service
+@AllArgsConstructor
 public class UsuarioService implements UserDetailsService {
 
     private UsuarioRepository usuarioRepository;
     private PerfilService perfilService;
     private final PasswordEncoder passwordEncoder;
     private JWTService jwtService;
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
