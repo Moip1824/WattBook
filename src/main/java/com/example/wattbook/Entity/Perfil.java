@@ -20,17 +20,20 @@ public class Perfil implements Serializable {
     @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @Column(name = "descripcion", nullable = false)
+    @Column(name = "apellidos", nullable = false)
+    private String apellidos;
+
+    @Column(name = "descripcion", nullable = true)
     private String descripcion;
 
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "imagen", nullable = false)
+    @Column(name = "imagen", nullable = true)
     private String imagen;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Genero generos;
 
     @ManyToOne
