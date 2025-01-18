@@ -12,10 +12,11 @@ create table if not exists usuario(
 create table if not exists perfil(
     id serial primary key,
     nombre varchar(50) not null,
-    descripcion varchar(255) not null,
+    apellidos varchar(50) not null,
+    descripcion varchar(255),
     email varchar(50) not null,
-    imagen varchar(255) not null,
-    generos generos not null,
+    imagen varchar(255),
+    generos generos, -- Generos de libros
     usuario_id int not null,
     foreign key (usuario_id) references usuario(id)
 );
