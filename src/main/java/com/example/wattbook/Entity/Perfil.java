@@ -2,16 +2,18 @@ package com.example.wattbook.Entity;
 
 import com.example.wattbook.Enums.Genero;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.io.Serializable;
 
-@Data
 @Entity
 @Table(name = "perfil")
-public class Perfil implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+public class Perfil {
 
     @Id
     @Column(name = "id", nullable = false)
@@ -19,6 +21,9 @@ public class Perfil implements Serializable {
 
     @Column(name = "nombre", nullable = false)
     private String nombre;
+
+    @Column(name = "apellidos", nullable = false)
+    private String apellidos;
 
     @Column(name = "descripcion", nullable = false)
     private String descripcion;

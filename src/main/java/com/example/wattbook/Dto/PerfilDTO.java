@@ -1,14 +1,17 @@
 package com.example.wattbook.Dto;
 
+
 import com.example.wattbook.Enums.Genero;
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Data
+@Builder
 @Getter
 @Setter
-public class RegistroDTO {
+public class PerfilDTO {
 
     private Long id;
     private String nombre;
@@ -18,8 +21,5 @@ public class RegistroDTO {
     private Genero generos;
     private String email;
 
-
-    private String username;
-    private String password;
 
 }
