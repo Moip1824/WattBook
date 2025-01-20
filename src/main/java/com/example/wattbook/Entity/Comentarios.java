@@ -31,4 +31,5 @@ public class Comentarios implements Serializable {
     @Column(name = "fecha", nullable = false)
     private Date fecha;
 
+
 }
