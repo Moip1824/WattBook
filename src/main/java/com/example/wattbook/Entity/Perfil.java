@@ -16,30 +16,31 @@ import java.io.Serializable;
 public class Perfil {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "nombre", nullable = false)
+    @Column(name = "nombre")
     private String nombre;
 
-    @Column(name = "apellidos", nullable = false)
+    @Column(name = "apellidos")
     private String apellidos;
 
-    @Column(name = "descripcion", nullable = false)
+    @Column(name = "descripcion")
     private String descripcion;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email")
     private String email;
 
-    @Column(name = "imagen", nullable = false)
+    @Column(name = "imagen")
     private String imagen;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column()
     private Genero generos;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
 }
