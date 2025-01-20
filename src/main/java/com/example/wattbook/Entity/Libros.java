@@ -20,6 +20,7 @@ public class Libros implements Serializable {
 
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "nombre", nullable = false)
@@ -32,7 +33,7 @@ public class Libros implements Serializable {
     @Column(nullable = false)
     private Genero generos;
 
-    @Column(name = "fecha_publicacion", nullable = false)
+    @Column(name = "fecha_publicacion")
     private Date fechaPublicacion;
 
     @Column(name = "imagen", nullable = false)

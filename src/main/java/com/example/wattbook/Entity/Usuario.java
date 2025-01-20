@@ -31,4 +31,11 @@ public class Usuario implements Serializable {
     @Column(nullable = false)
     private Rol rol;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
