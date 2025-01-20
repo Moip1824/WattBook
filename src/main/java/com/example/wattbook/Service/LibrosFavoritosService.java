@@ -17,4 +17,9 @@ public class LibrosFavoritosService implements ILibrosFavoritosService {
     public List<LibrosFavoritos> findAll() {
         return librosFavoritosRepository.findAll();
     }
+
+    @Override
+    public void deleteById(Long id) {
+        librosFavoritosRepository.deleteById(id);
+    }
 }

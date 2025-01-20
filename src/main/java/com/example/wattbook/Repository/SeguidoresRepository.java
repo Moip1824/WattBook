@@ -1,9 +1,7 @@
 package com.example.wattbook.Repository;
 
-import com.example.wattbook.Entity.Seguidores;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import com.example.wattbook.Entity.Seguidores;
 
-public interface SeguidoresRepository extends JpaRepository<Seguidores, Long>, JpaSpecificationExecutor<Seguidores> {
-
+public interface SeguidoresRepository extends JpaRepository<Seguidores, Long> {
 }

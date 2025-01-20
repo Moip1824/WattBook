@@ -5,4 +5,5 @@ import java.util.List;
 
 public interface ILibrosFavoritosService {
     List<LibrosFavoritos> findAll();
+    void deleteById(Long id);
 }
