@@ -23,21 +23,22 @@ public class Perfil implements Serializable {
     @Column(name = "apellidos", nullable = false)
     private String apellidos;
 
-    @Column(name = "descripcion", nullable = true)
+    @Column(name = "descripcion")
     private String descripcion;
 
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "imagen", nullable = true)
+    @Column(name = "imagen")
     private String imagen;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = true)
+    @Column
     private Genero generos;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
+
 
 }
