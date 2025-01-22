@@ -7,10 +7,10 @@ import lombok.Setter;
 
 import java.io.Serializable;
 
+@Getter
+@Setter
 @Data
 @Entity
-@Setter
-@Getter
 @Table(name = "votos")
 public class Votos implements Serializable {
 

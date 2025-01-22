@@ -3,7 +3,7 @@ package com.example.wattbook.Entity;
 import com.example.wattbook.Enums.Genero;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
 
 import java.io.Serializable;
 
@@ -18,7 +18,6 @@ import java.io.Serializable;
 public class Perfil {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -45,5 +44,21 @@ public class Perfil {
     @JoinColumn(name = "usuario_id")
     @JsonBackReference
     private Usuario usuario;
+
+
+
+    @Override
+    public String toString() {
+        return "Perfil{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", email='" + email + '\'' +
+                ", imagen='" + imagen + '\'' +
+                ", generos=" + generos +
+                '}';
+    }
+
 
 }

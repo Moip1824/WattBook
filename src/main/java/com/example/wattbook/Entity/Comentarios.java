@@ -2,10 +2,14 @@ package com.example.wattbook.Entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.sql.Date;
 
+@Getter
+@Setter
 @Data
 @Entity
 @Table(name = "comentarios")
@@ -30,5 +34,6 @@ public class Comentarios implements Serializable {
 
     @Column(name = "fecha", nullable = false)
     private Date fecha;
+
 
 }
