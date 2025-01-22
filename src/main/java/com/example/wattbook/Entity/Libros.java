@@ -9,11 +9,15 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.sql.Date;
 
-@Getter
-@Setter
 @Data
 @Entity
 @Table(name = "libros")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+
 public class Libros implements Serializable {
 
     private static final long serialVersionUID = 1L;

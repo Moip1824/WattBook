@@ -1,7 +1,6 @@
 package com.example.wattbook.Entity;
 
 import com.example.wattbook.Enums.Genero;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -37,7 +36,7 @@ public class Perfil {
     private String imagen;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "generos")
+    @Column
     private Genero generos;
 
     @ManyToOne
