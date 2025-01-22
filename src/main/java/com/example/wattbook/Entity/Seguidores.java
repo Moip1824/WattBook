@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import java.io.Serializable;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @Data
@@ -16,14 +18,12 @@ public class Seguidores implements Serializable {
 
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
-    private Usuario usuarioId;
+    @Column(name = "usuario_id", nullable = false)
+    private Long usuarioId;
 
-    @ManyToOne
-    @JoinColumn(name = "seguidor_id", nullable = false)
-    private Usuario seguidorId;
-
+    @Column(name = "seguidor_id", nullable = false)
+    private Long seguidorId;
 }

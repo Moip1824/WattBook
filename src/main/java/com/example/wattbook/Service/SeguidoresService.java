@@ -20,6 +20,9 @@ public class SeguidoresService implements ISeguidoresService {
 
     @Override
     public Seguidores addSeguidor(Seguidores seguidor) {
+        if (seguidor.getSeguidorId() == null) {
+            throw new IllegalArgumentException("Seguidor ID cannot be null");
+        }
         return seguidoresRepository.save(seguidor);
     }
 

@@ -25,7 +25,7 @@ public class LibrosFavoritosController {
 
     // Funciona
 
-    @DeleteMapping("borrar/{id}")
+    @DeleteMapping("eliminarLibroFav/{id}")
     public ResponseEntity<Void> deleteOneLibroFavorito(@PathVariable Long id) {
         librosFavoritosService.deleteById(id);
         return ResponseEntity.noContent().build();

@@ -1,6 +1,9 @@
 package com.example.wattbook.Controller;
 
+import com.example.wattbook.DTOs.SeguidoresDTO;
 import com.example.wattbook.Entity.Seguidores;
+import com.example.wattbook.Entity.Usuario;
+import com.example.wattbook.Repository.UsuarioRepository;
 import com.example.wattbook.Service.ISeguidoresService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,15 +28,18 @@ public class SeguidoresController {
 
     // Funciona
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/eliminarSeguidor/{id}")
     public ResponseEntity<Void> deleteSeguidor(@PathVariable Long id) {
         seguidoresService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("anyadirSeguidor")
-    public ResponseEntity<Seguidores> addSeguidor(@RequestBody Seguidores seguidor) {
-        Seguidores seguidorGuardado = seguidoresService.addSeguidor(seguidor);
-        return ResponseEntity.ok(seguidorGuardado);
+    @PostMapping("/anyadirSeguidor")
+    public Seguidores addSeguidor(@RequestBody SeguidoresDTO seguidoresDTO) {
+        Seguidores seguidores = new Seguidores();
+        seguidores.setUsuarioId(seguidoresDTO.getUsuarioId());
+        seguidores.setSeguidorId(seguidoresDTO.getSeguidorId());
+
+        return seguidoresService.addSeguidor(seguidores);
     }
 }
