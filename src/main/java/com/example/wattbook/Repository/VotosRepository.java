@@ -4,6 +4,8 @@ import com.example.wattbook.Entity.Votos;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-public interface VotosRepository extends JpaRepository<Votos, Long>, JpaSpecificationExecutor<Votos> {
+import java.util.Optional;
 
+public interface VotosRepository extends JpaRepository<Votos, Long>, JpaSpecificationExecutor<Votos> {
+    Optional<Votos> findByLibroId_IdAndUsuarioId_Id(Long libroId, Long usuarioId);
 }

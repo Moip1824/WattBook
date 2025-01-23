@@ -1,6 +1,5 @@
 create type generos as enum('Aventura', 'Ciencia Ficcion', 'Fantasía', 'Romance', 'Misterio', 'Biográfico', 'Historia', 'Autoayuda');
 create type roles as enum('ADMIN', 'USUARIO');
-create type tipo_baneo as enum('TEMPORAL', 'PERMANENTE');
 
 create table if not exists usuario(
     id serial primary key ,
@@ -12,10 +11,11 @@ create table if not exists usuario(
 create table if not exists perfil(
     id serial primary key,
     nombre varchar(50) not null,
-    descripcion varchar(255) not null,
+    apellidos varchar(50) not null,
+    descripcion varchar(255),
     email varchar(50) not null,
-    imagen varchar(255) not null,
-    generos generos not null,
+    imagen varchar(255),
+    generos generos, -- Generos de libros
     usuario_id int not null,
     foreign key (usuario_id) references usuario(id)
 );
@@ -43,7 +43,6 @@ create table if not exists usuarios_baneados(
     id serial primary key,
     usuario_id int not null,
     fecha_baneo date not null,
-    tipo_baneo tipo_baneo not null,
     motivo_baneo varchar(255) not null,
     foreign key (usuario_id) references usuario(id)
 );
