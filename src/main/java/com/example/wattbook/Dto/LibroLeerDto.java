@@ -9,7 +9,7 @@ import java.util.Date;
 @Data
 @Getter
 @Setter
-public class LibroDto {
+public class LibroLeerDto {
     private Long id;
     private String nombre;
     private String descripcion;

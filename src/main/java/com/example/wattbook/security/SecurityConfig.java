@@ -32,6 +32,8 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req -> req.requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/libros/crear").permitAll()
+                        .requestMatchers("/libros/MostrarLibros").permitAll()
                         .requestMatchers("/seguidores/anyadirSeguidor").permitAll()
                         .requestMatchers("/seguidores/eliminarSeguidor/{id}").permitAll()
                         .requestMatchers("/seguidores/listaSeguidores").permitAll()
