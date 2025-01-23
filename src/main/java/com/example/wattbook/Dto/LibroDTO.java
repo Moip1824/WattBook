@@ -1,4 +1,4 @@
-package com.example.wattbook.DTOs;
+package com.example.wattbook.Dto;
 
 import com.example.wattbook.Enums.Genero;
 

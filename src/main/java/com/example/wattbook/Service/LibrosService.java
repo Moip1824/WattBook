@@ -1,6 +1,6 @@
 package com.example.wattbook.Service;
 
-import com.example.wattbook.DTOs.LibroDTO;
+import com.example.wattbook.Dto.UsuarioDTO;
 import com.example.wattbook.Entity.Libros;
 import com.example.wattbook.Entity.Usuario;
 import com.example.wattbook.Entity.Votos;
@@ -25,7 +25,7 @@ public class LibrosService {
     @Autowired
     private UsuarioRepository UsuarioRepository;
 
-    public List<LibroDTO> obtenerLibrosConVotos() {
+    public List<UsuarioDTO.LibroDTO> obtenerLibrosConVotos() {
         return librosRepository.obtenerLibrosYVotos();
     }
 

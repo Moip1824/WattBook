@@ -38,7 +38,7 @@ public class UsuarioService implements UserDetailsService {
     public Perfil obtenerPerfil(Long usuarioId) {
         return perfilRepository.findByUsuarioId(usuarioId)
                 .orElseThrow(() -> new EntityNotFoundException("Perfil no encontrado para el usuario con ID: " + usuarioId));
-        }
+    }
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return usuarioRepository.findTopByUsername(username).orElse(null);
