@@ -70,6 +70,7 @@ public class UsuarioService implements UserDetailsService {
         return usuarioGuardado;
     }
 
+
     public ResponseEntity<RespuestaDTO> login(LoginDTO dto){
 
         Optional<Usuario> usuarioOpcional = usuarioRepository.findTopByUsername(dto.getUsername());
