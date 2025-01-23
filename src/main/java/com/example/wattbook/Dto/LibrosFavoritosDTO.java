@@ -1,4 +1,4 @@
-package com.example.wattbook.DTOs;
+package com.example.wattbook.Dto;
 
 public class LibrosFavoritosDTO {
     private Long userId;
