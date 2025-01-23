@@ -1,5 +1,8 @@
 package com.example.wattbook.Service;
 
+import com.example.wattbook.DTOs.LibrosFavoritosDTO;
+import com.example.wattbook.Entity.Libros;
+import com.example.wattbook.Entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.wattbook.Repository.LibrosFavoritosRepository;
@@ -21,5 +24,19 @@ public class LibrosFavoritosService implements ILibrosFavoritosService {
     @Override
     public void deleteById(Long id) {
         librosFavoritosRepository.deleteById(id);
+    }
+
+    @Override
+    public LibrosFavoritos addLibroFavorito(LibrosFavoritosDTO libroFavoritoDTO) {
+        LibrosFavoritos libroFavorito = new LibrosFavoritos();
+        Usuario usuario = new Usuario();
+        usuario.setId(libroFavoritoDTO.getUserId());
+        libroFavorito.setUsuarioId(usuario);
+
+        Libros libro = new Libros();
+        libro.setId(libroFavoritoDTO.getLibroId());
+        libroFavorito.setLibroId(libro);
+
+        return librosFavoritosRepository.save(libroFavorito);
     }
 }
