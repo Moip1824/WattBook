@@ -21,6 +21,7 @@ public class SecurityConfig {
     private final JWTFilter jwtFilterChain;
     private final AuthenticationProvider authenticationProvider;
 
+
     @Bean
     public AccessDeniedHandler accessDeniedHandler() {
         return new CustomAccessDeniedHandler();
