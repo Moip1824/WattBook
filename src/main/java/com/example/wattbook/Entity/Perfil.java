@@ -2,11 +2,10 @@ package com.example.wattbook.Entity;
 
 import com.example.wattbook.Enums.Genero;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.io.Serializable;
 
-@Data
 @Entity
 @Table(name = "perfil")
 @Getter
@@ -17,6 +16,7 @@ import java.io.Serializable;
 public class Perfil {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -36,15 +36,12 @@ public class Perfil {
     private String imagen;
 
     @Enumerated(EnumType.STRING)
-    @Column
+    @Column()
     private Genero generos;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
-    @JsonBackReference
     private Usuario usuario;
-
-
 
     @Override
     public String toString() {
