@@ -2,18 +2,20 @@ package com.example.wattbook.Entity;
 
 import com.example.wattbook.Enums.Genero;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.sql.Date;
 
-@Getter
-@Setter
 @Data
 @Entity
 @Table(name = "libros")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+
 public class Libros implements Serializable {
 
     private static final long serialVersionUID = 1L;
