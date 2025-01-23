@@ -1,5 +1,7 @@
 package com.example.wattbook.Controller;
 
+import com.example.wattbook.DTOs.LibroDTO;
+import com.example.wattbook.DTOs.LibrosFavoritosDTO;
 import com.example.wattbook.Entity.LibrosFavoritos;
 import com.example.wattbook.Service.ILibrosFavoritosService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +31,14 @@ public class LibrosFavoritosController {
     public ResponseEntity<Void> deleteOneLibroFavorito(@PathVariable Long id) {
         librosFavoritosService.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/anyadirLibroFavorito")
+    public ResponseEntity<LibrosFavoritos> addLibroFavorito(@RequestBody LibrosFavoritosDTO libroFavoritoDTO) {
+        if (libroFavoritoDTO.getUserId() == null || libroFavoritoDTO.getLibroId() == null) {
+            return ResponseEntity.badRequest().body(null);
+        }
+        LibrosFavoritos nuevoLibroFavorito = librosFavoritosService.addLibroFavorito(libroFavoritoDTO);
+        return ResponseEntity.ok(nuevoLibroFavorito);
     }
 }
