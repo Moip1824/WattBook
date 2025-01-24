@@ -1,4 +1,4 @@
-create type generos as enum('Aventura', 'Ciencia Ficcion', 'Fantasía', 'Romance', 'Misterio', 'Biográfico', 'Historia', 'Autoayuda');
+create type generos as enum('AVENTURA', 'CIENCIA FICCION', 'FANTASÍA', 'ROMANCE', 'MISTERIO', 'BIOGRÁFICO', 'HISTORIA', 'AUTOAYUDA');
 create type roles as enum('ADMIN', 'USUARIO');
 
 create table if not exists usuario(
