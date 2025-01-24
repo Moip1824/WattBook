@@ -5,14 +5,15 @@ import lombok.Data;
 
 import java.io.Serializable;
 
-@Data
 @Entity
+@Data
 @Table(name = "chat")
 public class Chat implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -24,7 +25,6 @@ public class Chat implements Serializable {
 
     @Column(name = "imagen", nullable = false)
     private String imagen;
-
 
     @ManyToOne
     @JoinColumn(name = "libro_id", nullable = false)
