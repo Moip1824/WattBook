@@ -27,23 +27,21 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UsuarioService implements UserDetailsService {
 
-    @Autowired
-    private PerfilRepository perfilRepository;
-
     private UsuarioRepository usuarioRepository;
     private PerfilService perfilService;
     private final PasswordEncoder passwordEncoder;
     private JWTService jwtService;
 
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return usuarioRepository.findTopByUsername(username).orElse(null);
-    }
+    @Autowired
+    private PerfilRepository perfilRepository;
 
     public Perfil obtenerPerfil(Long usuarioId) {
         return perfilRepository.findByUsuarioId(usuarioId)
                 .orElseThrow(() -> new EntityNotFoundException("Perfil no encontrado para el usuario con ID: " + usuarioId));
+    }
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return usuarioRepository.findTopByUsername(username).orElse(null);
     }
 
     public Usuario registrarUsuario(RegistroDTO dto){
@@ -71,6 +69,7 @@ public class UsuarioService implements UserDetailsService {
 
         return usuarioGuardado;
     }
+
 
     public ResponseEntity<RespuestaDTO> login(LoginDTO dto){
 

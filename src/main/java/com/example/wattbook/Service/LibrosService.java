@@ -1,7 +1,7 @@
 package com.example.wattbook.Service;
 
-import com.example.wattbook.DTOs.LibroDTO;
-import com.example.wattbook.Dto.LibroDto;
+import com.example.wattbook.Dto.LibroLeerDto;
+import com.example.wattbook.Dto.UsuarioDTO;
 import com.example.wattbook.Entity.Libros;
 import com.example.wattbook.Entity.Usuario;
 import com.example.wattbook.Entity.Votos;
@@ -27,7 +27,7 @@ public class LibrosService {
     @Autowired
     private UsuarioRepository UsuarioRepository;
 
-    public List<LibroDTO> obtenerLibrosConVotos() {
+    public List<UsuarioDTO.LibroDTO> obtenerLibrosConVotos() {
         return librosRepository.obtenerLibrosYVotos();
     }
 
@@ -64,17 +64,16 @@ public class LibrosService {
                     nuevoVoto.setTipoVoto(esLike);
                     return votoRepository.save(nuevoVoto);
                 });
-
     }
-    public List<LibroDto> getAllLibros() {
+    public List<LibroLeerDto> getAllLibros() {
         return librosRepository.findAll().stream().map(this::convDto).collect(Collectors.toList());
     }
-    public LibroDto getLibro(Long id) {
+    public LibroLeerDto getLibro(Long id) {
         return librosRepository.findById(id).map(this::convDto).orElseThrow(() -> new RuntimeException("Libro no encontrado"));
     }
 
-    private LibroDto convDto(Libros libro) {
-        LibroDto libroDto = new LibroDto();
+    private LibroLeerDto convDto(Libros libro) {
+        LibroLeerDto libroDto = new LibroLeerDto();
         libroDto.setId(libro.getId());
         libroDto.setNombre(libro.getNombre());
         libroDto.setDescripcion(libro.getDescripcion());
@@ -84,8 +83,6 @@ public class LibrosService {
         libroDto.setAutorId(libro.getAutorId().getId());
         return libroDto;
     }
-
-
 
 
 }

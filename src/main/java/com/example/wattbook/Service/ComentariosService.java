@@ -10,6 +10,7 @@ import com.example.wattbook.Repository.UsuarioRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.example.wattbook.Repository.ComentariosRepository;
 
 import java.sql.Date;
 import java.util.List;
@@ -17,7 +18,8 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class ComentariosService {
+public class ComentariosService implements IComentariosService {
+
     @Autowired
     private ComentariosRepository comentariosRepository;
     @Autowired
@@ -27,6 +29,10 @@ public class ComentariosService {
 
     public List<ComentarioDto> getAllComentarios() {
         return comentariosRepository.findAll().stream().map(this::convDto).collect(Collectors.toList());
+    }
+    @Override
+    public void deleteById(Long id) {
+        comentariosRepository.deleteById(id);
     }
 
     public void agregarComentario(ComentarioDto comentarioDto) {
