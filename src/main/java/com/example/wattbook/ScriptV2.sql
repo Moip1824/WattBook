@@ -54,20 +54,32 @@ create table if not exists votos(
     tipo_voto boolean
 );
 
-create table if not exists grupos(
+create table if not exists chat(
     id serial primary key,
+    libro_id int not null,
     nombre varchar(50) not null,
     descripcion varchar(255) not null,
-    imagen varchar(255) not null
+    imagen varchar(255) not null,
+    foreign key (libro_id) references libros(id)
+
 );
 
-create table if not exists grupos_usuarios(
+create table if not exists chat_usuarios(
     id serial primary key,
     usuario_id int not null,
-    grupo_id int not null,
+    chat_id int not null,
     foreign key (usuario_id) references usuario(id),
-    foreign key (grupo_id) references grupos(id)
+    foreign key (chat_id) references chat(id)
 );
+create table if not exists chat_mesnsajes(
+    id serial primary key,
+    usuario_id int not null,
+    chat_id int not null,
+    fecha timestamp default now() not null,
+    foreign key (usuario_id) references usuario(id),
+    foreign key (chat_id) references chat(id)
+);
+
 
 create table if not exists libros_favoritos(
     id serial primary key,
