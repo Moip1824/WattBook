@@ -1,5 +1,6 @@
 package com.example.wattbook.Controller;
 
+import com.example.wattbook.Dto.LibroDTO;
 import com.example.wattbook.Dto.LibroLeerDto;
 import com.example.wattbook.Dto.UsuarioDTO;
 import com.example.wattbook.Entity.Libros;
@@ -20,9 +21,10 @@ public class LibrosController {
 
 
     @GetMapping
-    public ResponseEntity<List<UsuarioDTO.LibroDTO>> obtenerLibros() {
+    public ResponseEntity<List<LibroDTO>> obtenerLibros() {
         return ResponseEntity.ok(libroService.obtenerLibrosConVotos());
     }
+
 
     @PostMapping("/crear")
     public ResponseEntity<Libros> publicarLibro(@RequestBody Libros libro) {
