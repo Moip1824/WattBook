@@ -1,7 +1,11 @@
 package com.example.wattbook.Dto;
 
 import com.example.wattbook.Enums.Genero;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class LibroDTO {
     private Long id;
     private String nombre;
@@ -11,13 +15,14 @@ public class LibroDTO {
     private Long autorId;
     private Long likes;
     private Long dislikes;
+    private String username;
 
 
     public LibroDTO() {
     }
 
 
-    public LibroDTO(Long id, String nombre, String descripcion, Genero generos, String imagen, Long autorId, Long likes, Long dislikes) {
+    public LibroDTO(Long id, String nombre, String descripcion, Genero generos, String imagen, Long autorId, String username, Long likes, Long dislikes) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -26,6 +31,7 @@ public class LibroDTO {
         this.autorId = autorId;
         this.likes = likes;
         this.dislikes = dislikes;
+        this.username = username;
     }
 
     public Long getId() {
