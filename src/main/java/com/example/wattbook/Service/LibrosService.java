@@ -1,5 +1,6 @@
 package com.example.wattbook.Service;
 
+import com.example.wattbook.Dto.LibroDTO;
 import com.example.wattbook.Dto.LibroLeerDto;
 import com.example.wattbook.Dto.UsuarioDTO;
 import com.example.wattbook.Entity.Libros;
@@ -27,9 +28,10 @@ public class LibrosService {
     @Autowired
     private UsuarioRepository UsuarioRepository;
 
-    public List<UsuarioDTO.LibroDTO> obtenerLibrosConVotos() {
+    public List<LibroDTO> obtenerLibrosConVotos() {
         return librosRepository.obtenerLibrosYVotos();
     }
+
 
     public Libros publicarLibro(Libros libro) {
         // Obtener el autor desde la base de datos utilizando su ID
