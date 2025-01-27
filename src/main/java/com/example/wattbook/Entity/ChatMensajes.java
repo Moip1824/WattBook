@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Entity
 @Data
-@Table(name = "chat_mesnsajes")
+@Table(name = "chat_mensajes")
 public class ChatMensajes implements Serializable {
 
     private static final long serialVersionUID = 1L;
