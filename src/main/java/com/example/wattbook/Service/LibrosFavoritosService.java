@@ -1,6 +1,6 @@
 package com.example.wattbook.Service;
 
-import com.example.wattbook.DTOs.LibrosFavoritosDTO;
+import com.example.wattbook.Dto.LibrosFavoritosDTO;
 import com.example.wattbook.Entity.Libros;
 import com.example.wattbook.Entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;

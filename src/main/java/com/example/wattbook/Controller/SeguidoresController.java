@@ -1,9 +1,7 @@
 package com.example.wattbook.Controller;
 
-import com.example.wattbook.DTOs.SeguidoresDTO;
+import com.example.wattbook.Dto.RespuestaDTO;
 import com.example.wattbook.Entity.Seguidores;
-import com.example.wattbook.Entity.Usuario;
-import com.example.wattbook.Repository.UsuarioRepository;
 import com.example.wattbook.Service.ISeguidoresService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +33,7 @@ public class SeguidoresController {
     }
 
     @PostMapping("/anyadirSeguidor")
-    public Seguidores addSeguidor(@RequestBody SeguidoresDTO seguidoresDTO) {
+    public Seguidores addSeguidor(@RequestBody RespuestaDTO.SeguidoresDTO seguidoresDTO) {
         Seguidores seguidores = new Seguidores();
         seguidores.setUsuarioId(seguidoresDTO.getUsuarioId());
         seguidores.setSeguidorId(seguidoresDTO.getSeguidorId());

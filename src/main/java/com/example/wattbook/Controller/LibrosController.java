@@ -1,6 +1,8 @@
 package com.example.wattbook.Controller;
 
-import com.example.wattbook.DTOs.LibroDTO;
+import com.example.wattbook.Dto.LibroDTO;
+import com.example.wattbook.Dto.LibroLeerDto;
+import com.example.wattbook.Dto.UsuarioDTO;
 import com.example.wattbook.Entity.Libros;
 import com.example.wattbook.Entity.Votos;
 import com.example.wattbook.Service.LibrosService;
@@ -23,6 +25,7 @@ public class LibrosController {
         return ResponseEntity.ok(libroService.obtenerLibrosConVotos());
     }
 
+
     @PostMapping("/crear")
     public ResponseEntity<Libros> publicarLibro(@RequestBody Libros libro) {
         return ResponseEntity.ok(libroService.publicarLibro(libro));
@@ -33,5 +36,14 @@ public class LibrosController {
                                             @RequestParam Long usuarioId,
                                             @RequestParam boolean esLike) {
         return ResponseEntity.ok(libroService.votarLibro(libroId, usuarioId, esLike));
+    }
+    @GetMapping("/MostrarLibros")
+    public ResponseEntity<List<LibroLeerDto>> getAllLibros() {
+        return ResponseEntity.ok(libroService.getAllLibros());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<LibroLeerDto> getLibro(@PathVariable Long id) {
+        return ResponseEntity.ok(libroService.getLibro(id));
     }
 }

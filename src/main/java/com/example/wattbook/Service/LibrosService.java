@@ -1,6 +1,8 @@
 package com.example.wattbook.Service;
 
-import com.example.wattbook.DTOs.LibroDTO;
+import com.example.wattbook.Dto.LibroDTO;
+import com.example.wattbook.Dto.LibroLeerDto;
+import com.example.wattbook.Dto.UsuarioDTO;
 import com.example.wattbook.Entity.Libros;
 import com.example.wattbook.Entity.Usuario;
 import com.example.wattbook.Entity.Votos;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class LibrosService {
@@ -28,6 +31,7 @@ public class LibrosService {
     public List<LibroDTO> obtenerLibrosConVotos() {
         return librosRepository.obtenerLibrosYVotos();
     }
+
 
     public Libros publicarLibro(Libros libro) {
         // Obtener el autor desde la base de datos utilizando su ID
@@ -63,5 +67,24 @@ public class LibrosService {
                     return votoRepository.save(nuevoVoto);
                 });
     }
+    public List<LibroLeerDto> getAllLibros() {
+        return librosRepository.findAll().stream().map(this::convDto).collect(Collectors.toList());
+    }
+    public LibroLeerDto getLibro(Long id) {
+        return librosRepository.findById(id).map(this::convDto).orElseThrow(() -> new RuntimeException("Libro no encontrado"));
+    }
+
+    private LibroLeerDto convDto(Libros libro) {
+        LibroLeerDto libroDto = new LibroLeerDto();
+        libroDto.setId(libro.getId());
+        libroDto.setNombre(libro.getNombre());
+        libroDto.setDescripcion(libro.getDescripcion());
+        libroDto.setGeneros(libro.getGeneros());
+        libroDto.setFechaPublicacion(libro.getFechaPublicacion());
+        libroDto.setImagen(libro.getImagen());
+        libroDto.setAutorId(libro.getAutorId().getId());
+        return libroDto;
+    }
+
 
 }

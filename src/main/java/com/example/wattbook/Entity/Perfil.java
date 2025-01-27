@@ -2,36 +2,39 @@ package com.example.wattbook.Entity;
 
 import com.example.wattbook.Enums.Genero;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 
-@Getter
-@Setter
 @Data
 @Entity
 @Table(name = "perfil")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class Perfil implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "nombre", nullable = false)
+    @Column(name = "nombre")
     private String nombre;
 
-    @Column(name = "apellidos", nullable = false)
+    @Column(name = "apellidos")
     private String apellidos;
 
     @Column(name = "descripcion")
     private String descripcion;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email")
     private String email;
 
     @Column(name = "imagen")
@@ -42,7 +45,7 @@ public class Perfil implements Serializable {
     private Genero generos;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
+    @JoinColumn(name = "usuario_id")
     @JsonBackReference
     private Usuario usuario;
 
