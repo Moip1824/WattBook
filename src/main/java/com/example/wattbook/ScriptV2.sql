@@ -4,8 +4,8 @@ create type tipo_baneo as enum('TEMPORAL', 'PERMANENTE');
 
 create table if not exists usuario(
     id serial primary key ,
-    nombreusuario varchar(50) not null,
-    contrasena varchar(50) not null,
+    username varchar(50) not null,
+    password varchar(50) not null,
     rol roles not null
 );
 
@@ -55,20 +55,7 @@ create table if not exists votos(
     tipo_voto boolean
 );
 
-create table if not exists grupos(
-    id serial primary key,
-    nombre varchar(50) not null,
-    descripcion varchar(255) not null,
-    imagen varchar(255) not null
-);
 
-create table if not exists grupos_usuarios(
-    id serial primary key,
-    usuario_id int not null,
-    grupo_id int not null,
-    foreign key (usuario_id) references usuario(id),
-    foreign key (grupo_id) references grupos(id)
-);
 
 create table if not exists libros_favoritos(
     id serial primary key,
@@ -92,8 +79,6 @@ create table if not exists chat(
     mensaje varchar(255) not null,
     fecha date not null,
     libro_id int not null,
-    grupo_id int not null unique,
-    foreign key (grupo_id) references grupos(id),
     foreign key (libro_id) references libros(id),
     foreign key (usuario_id) references usuario(id)
 );
@@ -106,4 +91,18 @@ create table if not exists comentarios(
     fecha date not null,
     foreign key (libro_id) references libros(id),
     foreign key (usuario_id) references usuario(id)
+);
+
+CREATE TABLE chat_usuarios (
+                               id BIGSERIAL PRIMARY KEY,
+                               usuario_id BIGINT REFERENCES usuario(id),
+                               chat_id BIGINT REFERENCES chat(id)
+);
+
+CREATE TABLE chat_mensajes (
+                               id BIGSERIAL PRIMARY KEY,
+                               usuario_id BIGINT REFERENCES usuario(id),
+                               chat_id BIGINT REFERENCES chat(id),
+                               fecha TIMESTAMP NOT NULL,
+                               mensaje VARCHAR(255)
 );
