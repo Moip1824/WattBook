@@ -106,3 +106,4 @@ CREATE TABLE chat_mensajes (
                                fecha TIMESTAMP NOT NULL,
                                mensaje VARCHAR(255)
 );
+--F
