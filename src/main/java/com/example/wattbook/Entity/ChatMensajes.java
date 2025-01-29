@@ -2,22 +2,19 @@ package com.example.wattbook.Entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
 
-@Getter
-@Setter
-@Data
 @Entity
+@Data
 @Table(name = "chat_mensajes")
 public class ChatMensajes implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -34,5 +31,4 @@ public class ChatMensajes implements Serializable {
 
     @Column(name = "fecha", nullable = false)
     private Date fecha;
-
 }
