@@ -39,7 +39,9 @@ public class Comentarios implements Serializable {
 
     @PrePersist
     protected void onCreate() {
-        this.fecha = Date.valueOf(LocalDate.now());
+        if (this.fecha == null) {
+            this.fecha = Date.valueOf(LocalDate.now());
+        }
     }
 
 }
