@@ -48,9 +48,14 @@ public class ComentariosService implements IComentariosService {
         comentariosRepository.save(comentario);
 
     }
+    public List<ComentarioDto> obtenerComentariosPorLibro(Long libroId) {
+        List<Comentarios> comentarios = comentariosRepository.findByLibroId_Id(libroId);
+        return comentarios.stream().map(this::convDto).collect(Collectors.toList());
+    }
 
     private ComentarioDto convDto (Comentarios comentario) {
         ComentarioDto comentarioDto = new ComentarioDto();
+        comentarioDto.setId(comentario.getId());
         comentarioDto.setUsuarioId(comentario.getUsuarioId().getId());
         comentarioDto.setLibroId(comentario.getLibroId().getId());
         comentarioDto.setComentario(comentario.getComentario());

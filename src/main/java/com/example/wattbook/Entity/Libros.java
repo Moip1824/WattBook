@@ -38,7 +38,7 @@ public class Libros implements Serializable {
     @Column(name = "fecha_publicacion")
     private Date fechaPublicacion;
 
-    @Column(name = "imagen", nullable = false)
+    @Column(columnDefinition = "TEXT", name = "imagen")
     private String imagen;
 
     @ManyToOne

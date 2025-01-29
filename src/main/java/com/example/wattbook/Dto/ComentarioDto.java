@@ -10,6 +10,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class ComentarioDto {
+    private Long id;
     private Long usuarioId;
     private Long libroId;
     private String comentario;
