@@ -34,10 +34,13 @@ public class LibrosService {
 
 
     public Libros publicarLibro(Libros libro) {
-        Usuario autor = UsuarioRepository.findById(libro.getAutorId().getId()).orElseThrow(() -> new RuntimeException("Autor no encontrado"));
+        Usuario autor = UsuarioRepository.findById(libro.getAutorId().getId())
+                .orElseThrow(() -> new RuntimeException("Autor con ID " + libro.getAutorId().getId() + " no encontrado"));
         libro.setAutorId(autor);
         return librosRepository.save(libro);
     }
+
+
 
 
     public Votos votarLibro(Long libroId, Long usuarioId, boolean esLike) {
