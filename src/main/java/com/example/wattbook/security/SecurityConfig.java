@@ -32,6 +32,8 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req -> req.requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/votos/**").permitAll()
+                        .requestMatchers("/comentarios/**").permitAll()
                         .requestMatchers("/libros/**").permitAll()
                         .requestMatchers("/libros/crear").permitAll()
                         .requestMatchers("/libros/MostrarLibros").permitAll()
