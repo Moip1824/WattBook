@@ -36,6 +36,13 @@ public class Usuario implements UserDetails {
     @Column(nullable = false)
     private Rol rol;
 
+    @OneToMany(mappedBy = "usuarioId", cascade = CascadeType.ALL)
+    private List<ChatMensajes> mensajes;
+
+    @OneToMany(mappedBy = "usuarioId", cascade = CascadeType.ALL)
+    private List<ChatUsuarios> chats;
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singletonList(new SimpleGrantedAuthority(this.rol.name()));
