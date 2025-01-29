@@ -11,8 +11,6 @@ import java.io.Serializable;
 @Setter
 @Data
 @Entity
-@Setter
-@Getter
 @Table(name = "votos")
 public class Votos implements Serializable {
 

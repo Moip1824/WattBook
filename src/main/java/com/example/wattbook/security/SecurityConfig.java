@@ -36,20 +36,18 @@ public class SecurityConfig {
                         .requestMatchers("/libros/crear").permitAll()
                         .requestMatchers("/libros/MostrarLibros").permitAll()
                         .requestMatchers("/seguidores/anyadirSeguidor").permitAll()
-                        .requestMatchers("/seguidores/eliminarSeguidor/{id}").permitAll()
+                        .requestMatchers("/seguidores/eliminarSeguidor").permitAll()
                         .requestMatchers("/seguidores/listaSeguidores").permitAll()
+                        .requestMatchers("/libros-favoritos/anyadirLibroFavorito").permitAll()
+                        .requestMatchers("/libros-favoritos/listaLibros").permitAll()
                         .requestMatchers("/publicacion/**").hasAuthority("PERFIL")
                         .requestMatchers("/aptitud/**").hasAuthority("ADMIN")
+
                         .anyRequest().authenticated())
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtFilterChain, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling((exception) -> exception.accessDeniedHandler(accessDeniedHandler()))
         ;
-
-
         return http.build();
-
     }
-
-
 }
