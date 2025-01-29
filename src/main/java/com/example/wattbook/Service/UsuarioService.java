@@ -94,6 +94,11 @@ public class UsuarioService implements UserDetailsService {
         }
 
     }
+    public String getUsernameById(Long authorId) {
+        return usuarioRepository.findById(authorId)
+                .map(Usuario::getUsername)
+                .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
+    }
 
 
 

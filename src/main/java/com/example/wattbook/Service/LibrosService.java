@@ -34,13 +34,8 @@ public class LibrosService {
 
 
     public Libros publicarLibro(Libros libro) {
-        // Obtener el autor desde la base de datos utilizando su ID
         Usuario autor = UsuarioRepository.findById(libro.getAutorId().getId()).orElseThrow(() -> new RuntimeException("Autor no encontrado"));
-
-        // Asocia el autor con el libro
         libro.setAutorId(autor);
-
-        // Luego guarda el libro
         return librosRepository.save(libro);
     }
 

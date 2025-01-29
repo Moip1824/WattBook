@@ -23,4 +23,10 @@ public class UsuarioController {
         return ResponseEntity.ok(perfil);
     }
 
+    @GetMapping("/{authorId}/username")
+    public ResponseEntity<String> getUsername(@PathVariable Long authorId) {
+        String username = usuarioService.getUsernameById(authorId);
+        return ResponseEntity.ok(username);
+    }
+
 }
