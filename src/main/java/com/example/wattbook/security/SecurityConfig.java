@@ -36,6 +36,7 @@ public class SecurityConfig {
                         .requestMatchers("/comentarios/**").permitAll()
                         .requestMatchers("/libros/**").permitAll()
                         .requestMatchers("/libros/crear").permitAll()
+                        .requestMatchers("/usuario/**").permitAll()
                         .requestMatchers("/libros/MostrarLibros").permitAll()
                         .requestMatchers("/seguidores/anyadirSeguidor").permitAll()
                         .requestMatchers("/seguidores/eliminarSeguidor/{id}").permitAll()
