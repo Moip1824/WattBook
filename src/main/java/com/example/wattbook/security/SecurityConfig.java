@@ -40,6 +40,8 @@ public class SecurityConfig {
                         .requestMatchers("/seguidores/listaSeguidores").permitAll()
                         .requestMatchers("/libros-favoritos/anyadirLibroFavorito").permitAll()
                         .requestMatchers("/libros-favoritos/listaLibros").permitAll()
+                        .requestMatchers("/libros-favoritos/eliminarLibroFavorito").permitAll()
+                        .requestMatchers("usuario/{id}/perfil").permitAll()
                         .requestMatchers("/publicacion/**").hasAuthority("PERFIL")
                         .requestMatchers("/aptitud/**").hasAuthority("ADMIN")
 
