@@ -1,6 +1,7 @@
 package com.example.wattbook.Entity;
 
 import com.example.wattbook.Enums.Rol;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -37,9 +38,11 @@ public class Usuario implements UserDetails {
     private Rol rol;
 
     @OneToMany(mappedBy = "usuarioId", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<ChatMensajes> mensajes;
 
     @OneToMany(mappedBy = "usuarioId", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<ChatUsuarios> chats;
 
 

@@ -37,7 +37,7 @@ public class Perfil implements Serializable {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "imagen")
+    @Column(columnDefinition = "TEXT", name = "imagen")
     private String imagen;
 
     @Enumerated(EnumType.STRING)
