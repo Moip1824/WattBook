@@ -1,5 +1,6 @@
 package com.example.wattbook.Dto;
 
+import com.example.wattbook.Entity.Libros;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
@@ -14,6 +15,5 @@ public class ChatDTO {
     private String descripcion;
     private String imagen;
     private String nombre;
-    private Long libroId;
-
+    private Libros libroId;
 }
