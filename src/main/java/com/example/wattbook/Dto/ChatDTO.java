@@ -15,5 +15,5 @@ public class ChatDTO {
     private String descripcion;
     private String imagen;
     private String nombre;
-    private Libros libroId;
+    private Long libroId;
 }
