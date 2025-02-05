@@ -55,7 +55,6 @@ public class ComentariosService implements IComentariosService {
 
     private ComentarioDto convDto(Comentarios comentario) {
         ComentarioDto comentarioDto = new ComentarioDto();
-        comentarioDto.setId(comentario.getId());
         comentarioDto.setUsername(comentario.getUsuarioId().getUsername());
         comentarioDto.setLibroId(comentario.getLibroId().getId());
         comentarioDto.setComentario(comentario.getComentario());
