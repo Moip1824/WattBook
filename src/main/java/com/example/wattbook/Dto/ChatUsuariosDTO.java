@@ -13,6 +13,6 @@ import lombok.Setter;
 @Setter
 public class ChatUsuariosDTO {
     private Long id;
-    private Chat chatId;
-    private Usuario usuarioId;
+    private Long chatId;
+    private Long usuarioId;
 }

@@ -2,7 +2,6 @@ package com.example.wattbook.Controller;
 
 import com.example.wattbook.Dto.ChatUsuariosDTO;
 import com.example.wattbook.Entity.ChatUsuarios;
-import com.example.wattbook.Entity.Usuario;
 import com.example.wattbook.Service.ChatUsuariosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,23 +15,23 @@ public class ChatUsuariosController {
     @Autowired
     private ChatUsuariosService chatUsuariosService;
 
-    @PostMapping("/crear")
-    public ChatUsuarios crearUsuario(@RequestBody ChatUsuariosDTO chatUsuariosDTO) {
-        return chatUsuariosService.crearUsuario(chatUsuariosDTO);
+    @PostMapping("/agregar")
+    public ChatUsuarios agregarUsuario(@RequestBody ChatUsuariosDTO chatUsuariosDTO) {
+        return chatUsuariosService.agregarUsuarioAlChat(chatUsuariosDTO);
     }
 
     @DeleteMapping("/eliminar/{id}")
     public void eliminarUsuario(@PathVariable Long id) {
-        chatUsuariosService.eliminarUsuario(id);
+        chatUsuariosService.eliminarUsuarioDelChat(id);
     }
 
-    @GetMapping("/ver")
-    public List<ChatUsuarios> verUsuarios() {
-        return chatUsuariosService.verUsuarios();
+    @GetMapping("/usuarios/{chatId}")
+    public List<ChatUsuarios> obtenerUsuariosEnChat(@PathVariable Long chatId) {
+        return chatUsuariosService.obtenerUsuariosEnChat(chatId);
     }
 
-    @GetMapping("/verchats/{usuarioId}")
-    public List<ChatUsuarios> verChatsDeUsuario(@PathVariable Usuario usuarioId) {
-        return chatUsuariosService.verChatsDeUsuario(usuarioId);
+    @GetMapping("/chats/{usuarioId}")
+    public List<ChatUsuarios> obtenerChatsDeUsuario(@PathVariable Long usuarioId) {
+        return chatUsuariosService.obtenerChatsDeUsuario(usuarioId);
     }
 }

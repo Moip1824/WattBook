@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Data
@@ -29,4 +30,9 @@ public class Chat implements Serializable {
     @ManyToOne
     @JoinColumn(name = "libro_id", nullable = false)
     private Libros libroId;
+
+    @OneToMany(mappedBy = "chatId", cascade = CascadeType.ALL)
+    private List<ChatUsuarios> usuarios;
+
+
 }
