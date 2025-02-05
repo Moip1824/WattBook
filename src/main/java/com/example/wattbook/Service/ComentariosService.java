@@ -43,7 +43,7 @@ public class ComentariosService implements IComentariosService {
         comentario.setUsuarioId(usuario);
         comentario.setLibroId(libro);
         comentario.setComentario(comentarioDto.getComentario());
-        comentario.setFecha((Date) comentarioDto.getFecha());
+        comentario.setFecha(new java.sql.Date(comentarioDto.getFecha().getTime()));
 
         comentariosRepository.save(comentario);
 
