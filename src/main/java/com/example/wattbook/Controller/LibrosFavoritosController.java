@@ -1,8 +1,6 @@
 package com.example.wattbook.Controller;
 
-import com.example.wattbook.Dto.LibroDTO;
 import com.example.wattbook.Dto.LibrosFavoritosDTO;
-import com.example.wattbook.Entity.LibrosFavoritos;
 import com.example.wattbook.Service.ILibrosFavoritosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,28 +16,30 @@ public class LibrosFavoritosController {
     @Autowired
     private ILibrosFavoritosService librosFavoritosService;
 
-    // Funciona
-
     @GetMapping("/listaLibros")
-    public ResponseEntity<List<LibrosFavoritos>> getLibrosFavoritos() {
-        List<LibrosFavoritos> librosFavoritos = librosFavoritosService.findAll();
+    public ResponseEntity<List<LibrosFavoritosDTO>> getLibrosFavoritos() {
+        List<LibrosFavoritosDTO> librosFavoritos = librosFavoritosService.findAll();
         return ResponseEntity.ok(librosFavoritos);
     }
 
-    // Funciona
-
     @DeleteMapping("/eliminarLibroFav")
-    public ResponseEntity<Void> deleteOneLibroFavorito(@RequestBody LibroDTO libroDTO) {
-        librosFavoritosService.deleteById(libroDTO.getId());
+    public ResponseEntity<Void> deleteOneLibroFavorito(@RequestBody Long id) {
+        librosFavoritosService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/anyadirLibroFavorito")
-    public ResponseEntity<LibrosFavoritos> addLibroFavorito(@RequestBody LibrosFavoritosDTO libroFavoritoDTO) {
+    public ResponseEntity<LibrosFavoritosDTO> addLibroFavorito(@RequestBody LibrosFavoritosDTO libroFavoritoDTO) {
         if (libroFavoritoDTO.getUserId() == null || libroFavoritoDTO.getLibroId() == null) {
             return ResponseEntity.badRequest().body(null);
         }
-        LibrosFavoritos nuevoLibroFavorito = librosFavoritosService.addLibroFavorito(libroFavoritoDTO);
+        LibrosFavoritosDTO nuevoLibroFavorito = librosFavoritosService.addLibroFavorito(libroFavoritoDTO);
         return ResponseEntity.ok(nuevoLibroFavorito);
+    }
+
+    @GetMapping("/yourFaves/{usuarioId}")
+    public ResponseEntity<List<LibrosFavoritosDTO>> getLibrosFavoritosByUsuarioId(@PathVariable Long usuarioId) {
+        List<LibrosFavoritosDTO> librosFavoritos = librosFavoritosService.findByUsuarioId(usuarioId);
+        return ResponseEntity.ok(librosFavoritos);
     }
 }
