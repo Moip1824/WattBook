@@ -16,7 +16,7 @@ public class ChatMensajesDTO {
     private Long id;
     private Date fecha;
     private String mensaje;
-    private Chat chatId;
-    private Usuario usuarioId;
+    private Long chatId;
+    private Long usuarioId;
 
 }
