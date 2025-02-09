@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/libros-favoritos")
 public class LibrosFavoritosController {
@@ -27,9 +28,9 @@ public class LibrosFavoritosController {
 
     // Funciona
 
-    @DeleteMapping("eliminarLibroFav/{id}")
-    public ResponseEntity<Void> deleteOneLibroFavorito(@PathVariable Long id) {
-        librosFavoritosService.deleteById(id);
+    @DeleteMapping("/eliminarLibroFav")
+    public ResponseEntity<Void> deleteOneLibroFavorito(@RequestBody LibroDTO libroDTO) {
+        librosFavoritosService.deleteById(libroDTO.getId());
         return ResponseEntity.noContent().build();
     }
 

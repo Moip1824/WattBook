@@ -1,6 +1,8 @@
 package com.example.wattbook.Entity;
 
 import com.example.wattbook.Enums.Genero;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -42,6 +44,7 @@ public class Libros implements Serializable {
     private String imagen;
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "autor_id", nullable = false)
     private Usuario autorId;
 

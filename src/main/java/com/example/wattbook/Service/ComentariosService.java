@@ -43,7 +43,7 @@ public class ComentariosService implements IComentariosService {
         comentario.setUsuarioId(usuario);
         comentario.setLibroId(libro);
         comentario.setComentario(comentarioDto.getComentario());
-        comentario.setFecha((Date) comentarioDto.getFecha());
+        comentario.setFecha(new java.sql.Date(comentarioDto.getFecha().getTime()));
 
         comentariosRepository.save(comentario);
 
@@ -53,10 +53,9 @@ public class ComentariosService implements IComentariosService {
         return comentarios.stream().map(this::convDto).collect(Collectors.toList());
     }
 
-    private ComentarioDto convDto (Comentarios comentario) {
+    private ComentarioDto convDto(Comentarios comentario) {
         ComentarioDto comentarioDto = new ComentarioDto();
-        comentarioDto.setId(comentario.getId());
-        comentarioDto.setUsuarioId(comentario.getUsuarioId().getId());
+        comentarioDto.setUsername(comentario.getUsuarioId().getUsername());
         comentarioDto.setLibroId(comentario.getLibroId().getId());
         comentarioDto.setComentario(comentario.getComentario());
         comentarioDto.setFecha(comentario.getFecha());

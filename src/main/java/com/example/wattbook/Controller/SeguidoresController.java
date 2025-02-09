@@ -1,6 +1,7 @@
 package com.example.wattbook.Controller;
 
 import com.example.wattbook.Dto.RespuestaDTO;
+import com.example.wattbook.Dto.SeguidorDTO;
 import com.example.wattbook.Entity.Seguidores;
 import com.example.wattbook.Service.ISeguidoresService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/seguidores")
 public class SeguidoresController {
@@ -26,9 +28,9 @@ public class SeguidoresController {
 
     // Funciona
 
-    @DeleteMapping("/eliminarSeguidor/{id}")
-    public ResponseEntity<Void> deleteSeguidor(@PathVariable Long id) {
-        seguidoresService.deleteById(id);
+    @DeleteMapping("/eliminarSeguidor")
+    public ResponseEntity<Void> deleteSeguidor(@RequestBody SeguidorDTO seguidorDTO) {
+        seguidoresService.deleteById(seguidorDTO.getId());
         return ResponseEntity.noContent().build();
     }
 
