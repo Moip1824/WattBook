@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @Controller
@@ -22,10 +24,13 @@ public class ComentarioController {
     private final ComentariosService comentariosService;
 
     @PostMapping
-    public ResponseEntity<String> agregarComentario(@RequestBody ComentarioDto comentarioDto) {
+    public ResponseEntity<Map<String, String>> agregarComentario(@RequestBody ComentarioDto comentarioDto) {
         comentariosService.agregarComentario(comentarioDto);
-        return ResponseEntity.ok("Comentario agregado");
+
+        // Devolvemos un JSON válido en lugar de solo un string
+        return ResponseEntity.ok(Collections.singletonMap("mensaje", "Comentario agregado"));
     }
+
 
     @GetMapping("/libro/{libroId}")
     public ResponseEntity<List<ComentarioDto>> obtenerComentariosPorLibro(@PathVariable Long libroId) {

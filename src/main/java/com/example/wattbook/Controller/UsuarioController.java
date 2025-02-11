@@ -1,6 +1,7 @@
 package com.example.wattbook.Controller;
 
 import com.example.wattbook.Entity.Perfil;
+import com.example.wattbook.Entity.Usuario;
 import com.example.wattbook.Service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,5 +27,17 @@ public class UsuarioController {
         String username = usuarioService.getUsernameById(authorId);
         return ResponseEntity.ok(username);
     }
+
+    @GetMapping("/rol/{id}")
+    public ResponseEntity<String> obtenerRolPorId(@PathVariable Long id) {
+        Usuario usuario = usuarioService.obtenerUsuarioPorId(id);
+
+        if (usuario == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(usuario.getRol().name());
+    }
+
 
 }

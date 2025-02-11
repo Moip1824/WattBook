@@ -69,6 +69,10 @@ public class UsuarioService implements UserDetailsService {
 
         return usuarioGuardado;
     }
+    public Usuario obtenerUsuarioPorId(Long id) {
+        return usuarioRepository.findById(id).orElse(null);
+    }
+
 
 
     public ResponseEntity<RespuestaDTO> login(LoginDTO dto){
