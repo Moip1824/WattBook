@@ -11,6 +11,7 @@ import java.util.Date;
 @Setter
 public class ComentarioDto {
     private Long usuarioId;
+    private String username;
     private Long libroId;
     private String comentario;
     private Date fecha;

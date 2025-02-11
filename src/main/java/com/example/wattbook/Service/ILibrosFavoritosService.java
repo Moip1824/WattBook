@@ -1,11 +1,11 @@
 package com.example.wattbook.Service;
 
 import com.example.wattbook.Dto.LibrosFavoritosDTO;
-import com.example.wattbook.Entity.LibrosFavoritos;
 import java.util.List;
 
 public interface ILibrosFavoritosService {
-    List<LibrosFavoritos> findAll();
+    List<LibrosFavoritosDTO> findAll();
     void deleteById(Long id);
-    LibrosFavoritos addLibroFavorito(LibrosFavoritosDTO libroFavoritoDTO);
+    LibrosFavoritosDTO addLibroFavorito(LibrosFavoritosDTO libroFavoritoDTO);
+    List<LibrosFavoritosDTO> findByUsuarioId(Long usuarioId);
 }

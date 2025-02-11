@@ -1,5 +1,6 @@
 package com.example.wattbook.Service;
 
+import com.example.wattbook.Dto.LibroDTO;
 import com.example.wattbook.Dto.LibroLeerDto;
 import com.example.wattbook.Dto.UsuarioDTO;
 import com.example.wattbook.Entity.Libros;
@@ -27,20 +28,19 @@ public class LibrosService {
     @Autowired
     private UsuarioRepository UsuarioRepository;
 
-    public List<UsuarioDTO.LibroDTO> obtenerLibrosConVotos() {
+    public List<LibroDTO> obtenerLibrosConVotos() {
         return librosRepository.obtenerLibrosYVotos();
     }
 
+
     public Libros publicarLibro(Libros libro) {
-        // Obtener el autor desde la base de datos utilizando su ID
-        Usuario autor = UsuarioRepository.findById(libro.getAutorId().getId()).orElseThrow(() -> new RuntimeException("Autor no encontrado"));
-
-        // Asocia el autor con el libro
+        Usuario autor = UsuarioRepository.findById(libro.getAutorId().getId())
+                .orElseThrow(() -> new RuntimeException("Autor con ID " + libro.getAutorId().getId() + " no encontrado"));
         libro.setAutorId(autor);
-
-        // Luego guarda el libro
         return librosRepository.save(libro);
     }
+
+
 
 
     public Votos votarLibro(Long libroId, Long usuarioId, boolean esLike) {
@@ -82,6 +82,11 @@ public class LibrosService {
         libroDto.setImagen(libro.getImagen());
         libroDto.setAutorId(libro.getAutorId().getId());
         return libroDto;
+    }
+
+
+    public List<LibroDTO> obetenerLibrosPerfil(Long idAutor){
+       return librosRepository.obtenerLibrosYVotosporidauthor(idAutor);
     }
 
 

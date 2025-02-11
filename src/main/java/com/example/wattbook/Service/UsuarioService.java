@@ -69,6 +69,10 @@ public class UsuarioService implements UserDetailsService {
 
         return usuarioGuardado;
     }
+    public Usuario obtenerUsuarioPorId(Long id) {
+        return usuarioRepository.findById(id).orElse(null);
+    }
+
 
 
     public ResponseEntity<RespuestaDTO> login(LoginDTO dto){
@@ -93,6 +97,11 @@ public class UsuarioService implements UserDetailsService {
             throw new UsernameNotFoundException("Usuario no encontrado");
         }
 
+    }
+    public String getUsernameById(Long authorId) {
+        return usuarioRepository.findById(authorId)
+                .map(Usuario::getUsername)
+                .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
     }
 
 

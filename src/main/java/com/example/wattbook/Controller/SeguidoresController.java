@@ -1,7 +1,6 @@
 package com.example.wattbook.Controller;
 
-import com.example.wattbook.Dto.RespuestaDTO;
-import com.example.wattbook.Entity.Seguidores;
+import com.example.wattbook.Dto.SeguidorDTO;
 import com.example.wattbook.Service.ISeguidoresService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/seguidores")
 public class SeguidoresController {
@@ -16,28 +16,30 @@ public class SeguidoresController {
     @Autowired
     private ISeguidoresService seguidoresService;
 
-    // Funciona
-
     @GetMapping("/listaSeguidores")
-    public ResponseEntity<List<Seguidores>> getSeguidores() {
-        List<Seguidores> seguidores = seguidoresService.findAll();
+    public ResponseEntity<List<SeguidorDTO>> getSeguidores() {
+        List<SeguidorDTO> seguidores = seguidoresService.findAll();
         return ResponseEntity.ok(seguidores);
     }
 
-    // Funciona
-
-    @DeleteMapping("/eliminarSeguidor/{id}")
-    public ResponseEntity<Void> deleteSeguidor(@PathVariable Long id) {
+    @DeleteMapping("/eliminarSeguidor")
+    public ResponseEntity<Void> deleteOneSeguidor(@RequestBody Long id) {
         seguidoresService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
     @PostMapping("/anyadirSeguidor")
-    public Seguidores addSeguidor(@RequestBody RespuestaDTO.SeguidoresDTO seguidoresDTO) {
-        Seguidores seguidores = new Seguidores();
-        seguidores.setUsuarioId(seguidoresDTO.getUsuarioId());
-        seguidores.setSeguidorId(seguidoresDTO.getSeguidorId());
+    public ResponseEntity<SeguidorDTO> addSeguidor(@RequestBody SeguidorDTO seguidorDTO) {
+        if (seguidorDTO.getUserId() == null || seguidorDTO.getSeguidorId() == null) {
+            return ResponseEntity.badRequest().body(null);
+        }
+        SeguidorDTO nuevoSeguidor = seguidoresService.addSeguidor(seguidorDTO);
+        return ResponseEntity.ok(nuevoSeguidor);
+    }
 
-        return seguidoresService.addSeguidor(seguidores);
+    @GetMapping("/tusSeguidos/{usuarioId}")
+    public ResponseEntity<List<SeguidorDTO>> getSeguidoresByUsuarioId(@PathVariable Long usuarioId) {
+        List<SeguidorDTO> seguidores = seguidoresService.findByUsuarioId(usuarioId);
+        return ResponseEntity.ok(seguidores);
     }
 }
