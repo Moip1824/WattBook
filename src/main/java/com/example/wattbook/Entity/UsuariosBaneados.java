@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.time.*;
 
 @Getter
 @Setter
@@ -19,6 +20,7 @@ public class UsuariosBaneados implements Serializable {
 
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -26,7 +28,7 @@ public class UsuariosBaneados implements Serializable {
     private Usuario usuarioId;
 
     @Column(name = "fecha_baneo", nullable = false)
-    private Date fechaBaneo;
+    private LocalDate fechaBaneo;
 
     @Column(name = "motivo_baneo", nullable = false)
     private String motivoBaneo;

@@ -1,6 +1,7 @@
 package com.example.wattbook.Service;
 
 import com.example.wattbook.Dto.SeguidorDTO;
+import com.example.wattbook.Dto.UsuarioDTO;
 import com.example.wattbook.Entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,10 +17,12 @@ public class SeguidoresService implements ISeguidoresService {
 
     @Autowired
     private SeguidoresRepository seguidoresRepository;
+    @Autowired
+    private UsuarioService usuarioService;
 
     @Override
     public List<SeguidorDTO> findAll() {
-        return seguidoresRepository.findAll().stream().map(this::convertToDTO).collect(Collectors.toList());
+        return seguidoresRepository.findAll().stream().map(this::convertSeguidorToDTO).collect(Collectors.toList());
     }
 
     @Override
@@ -33,7 +36,15 @@ public class SeguidoresService implements ISeguidoresService {
         seguidor.setUsuarioId(seguidorDTO.getUserId());
         seguidor.setSeguidorId(seguidorDTO.getSeguidorId());
 
-        return convertToDTO(seguidoresRepository.save(seguidor));
+        return convertSeguidorToDTO(seguidoresRepository.save(seguidor));
+    }
+
+    @Override
+    public List<Long> getSeguidoresIds(Long usuarioId) {
+        return seguidoresRepository.findByUsuarioId(usuarioId)
+                .stream()
+                .map(Seguidores::getSeguidorId)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -41,15 +52,11 @@ public class SeguidoresService implements ISeguidoresService {
         List<Seguidores> seguidoresList = seguidoresRepository.findByUsuarioId(usuarioId);
         List<SeguidorDTO> seguidoresDTOList = new ArrayList<>();
         for (Seguidores seguidor : seguidoresList) {
-            seguidoresDTOList.add(convertToDTO(seguidor));
+            seguidoresDTOList.add(convertSeguidorToDTO(seguidor));
         }
         return seguidoresDTOList;
     }
-
-    private SeguidorDTO convertToDTO(Seguidores seguidor) {
-        SeguidorDTO dto = new SeguidorDTO();
-        dto.setUserId(seguidor.getUsuarioId());
-        dto.setSeguidorId(seguidor.getSeguidorId());
-        return dto;
+    private SeguidorDTO convertSeguidorToDTO(Seguidores seguidor) {
+        return new SeguidorDTO(seguidor.getUsuarioId(), seguidor.getSeguidorId());
     }
 }

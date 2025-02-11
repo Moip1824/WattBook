@@ -3,6 +3,7 @@ package com.example.wattbook.Service;
 import com.example.wattbook.Dto.LoginDTO;
 import com.example.wattbook.Dto.RegistroDTO;
 import com.example.wattbook.Dto.RespuestaDTO;
+import com.example.wattbook.Dto.UsuarioDTO;
 import com.example.wattbook.Entity.Perfil;
 import com.example.wattbook.Entity.Usuario;
 import com.example.wattbook.Repository.UsuarioRepository;
@@ -21,11 +22,13 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class UsuarioService implements UserDetailsService {
+public class UsuarioService implements UserDetailsService, IUsuarioService {
 
     private UsuarioRepository usuarioRepository;
     private PerfilService perfilService;
@@ -70,6 +73,10 @@ public class UsuarioService implements UserDetailsService {
         return usuarioGuardado;
     }
 
+    public Usuario findById(Long usuarioId) {
+        Optional<Usuario> usuarioOptional = usuarioRepository.findById(usuarioId);
+        return usuarioOptional.orElse(null);
+    }
 
     public ResponseEntity<RespuestaDTO> login(LoginDTO dto){
 
@@ -95,8 +102,14 @@ public class UsuarioService implements UserDetailsService {
 
     }
 
+    @Override
+    public List<UsuarioDTO> getAllPerfiles() {
+        return usuarioRepository.findAll().stream()
+                .map(this::convertUsuarioToDTO)
+                .collect(Collectors.toList());
+    }
 
-
-
-
+    private UsuarioDTO convertUsuarioToDTO(Usuario usuario) {
+        return new UsuarioDTO(usuario.getId(), usuario.getRol(), usuario.getUsername(), usuario.getPassword());
+    }
 }
