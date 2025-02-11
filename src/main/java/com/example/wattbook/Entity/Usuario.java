@@ -1,6 +1,7 @@
 package com.example.wattbook.Entity;
 
 import com.example.wattbook.Enums.Rol;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -10,7 +11,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-
+@Data
 @Entity
 @Table(name = "usuario")
 @Getter
@@ -36,9 +37,11 @@ public class Usuario implements UserDetails {
     private Rol rol;
 
     @OneToMany(mappedBy = "usuarioId", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<ChatMensajes> mensajes;
 
     @OneToMany(mappedBy = "usuarioId", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<ChatUsuarios> chats;
 
 
@@ -65,5 +68,12 @@ public class Usuario implements UserDetails {
     @Override
     public boolean isEnabled() {
         return UserDetails.super.isEnabled();
+    }
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

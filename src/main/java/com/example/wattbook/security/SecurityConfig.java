@@ -21,6 +21,7 @@ public class SecurityConfig {
     private final JWTFilter jwtFilterChain;
     private final AuthenticationProvider authenticationProvider;
 
+
     @Bean
     public AccessDeniedHandler accessDeniedHandler() {
         return new CustomAccessDeniedHandler();
@@ -32,11 +33,29 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req -> req.requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/votos/**").permitAll()
+                        .requestMatchers("/comentarios/**").permitAll()
+                        .requestMatchers("/libros/**").permitAll()
+                        .requestMatchers("/usuario/**").permitAll()
+                        .requestMatchers("/libros/{id}").permitAll()
+                        .requestMatchers("/libros/crear").permitAll()
+                        .requestMatchers("/usuario/**").permitAll()
+                        .requestMatchers("/libros/MostrarLibros").permitAll()
+                        .requestMatchers("/seguidores/anyadirSeguidor").permitAll()
+                        .requestMatchers("/seguidores/eliminarSeguidor").permitAll()
+                        .requestMatchers("/seguidores/tusSeguidos/{usuarioId}").permitAll()
+                        .requestMatchers("/seguidores/listaSeguidores").permitAll()
+                        .requestMatchers("/libros-favoritos/anyadirLibroFavorito").permitAll()
+                        .requestMatchers("/libros-favoritos/listaLibros").permitAll()
+                        .requestMatchers("/libros-favoritos/eliminarLibroFavorito").permitAll()
+                        .requestMatchers("/usuario/{id}/perfil").permitAll()
+                        .requestMatchers("/libros-favoritos/yourFaves/{usuarioId}").permitAll()
                         .requestMatchers("/chat/**").permitAll()
                         .requestMatchers("/chatusuario/**").permitAll()
                         .requestMatchers("/chatmensaje/**").permitAll()
                         .requestMatchers("/publicacion/**").hasAuthority("PERFIL")
                         .requestMatchers("/aptitud/**").hasAuthority("ADMIN")
+
                         .anyRequest().authenticated())
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtFilterChain, UsernamePasswordAuthenticationFilter.class)

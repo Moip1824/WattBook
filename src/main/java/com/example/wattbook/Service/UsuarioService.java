@@ -16,6 +16,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import com.example.wattbook.Repository.PerfilRepository;
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -29,7 +32,13 @@ public class UsuarioService implements UserDetailsService {
     private final PasswordEncoder passwordEncoder;
     private JWTService jwtService;
 
+    @Autowired
+    private PerfilRepository perfilRepository;
 
+    public Perfil obtenerPerfil(Long usuarioId) {
+        return perfilRepository.findByUsuarioId(usuarioId)
+                .orElseThrow(() -> new EntityNotFoundException("Perfil no encontrado para el usuario con ID: " + usuarioId));
+    }
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return usuarioRepository.findTopByUsername(username).orElse(null);
@@ -60,6 +69,11 @@ public class UsuarioService implements UserDetailsService {
 
         return usuarioGuardado;
     }
+    public Usuario obtenerUsuarioPorId(Long id) {
+        return usuarioRepository.findById(id).orElse(null);
+    }
+
+
 
     public ResponseEntity<RespuestaDTO> login(LoginDTO dto){
 
@@ -83,6 +97,11 @@ public class UsuarioService implements UserDetailsService {
             throw new UsernameNotFoundException("Usuario no encontrado");
         }
 
+    }
+    public String getUsernameById(Long authorId) {
+        return usuarioRepository.findById(authorId)
+                .map(Usuario::getUsername)
+                .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
     }
 
 

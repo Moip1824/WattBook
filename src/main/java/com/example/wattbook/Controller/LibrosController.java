@@ -68,4 +68,10 @@ public class LibrosController {
     public ResponseEntity<LibroLeerDto> getLibro(@PathVariable Long id) {
         return ResponseEntity.ok(libroService.getLibro(id));
     }
+
+
+    @GetMapping("/perfil/publicaciones/{id}")
+    public List<LibroDTO> obtenerLibrosPefil(@PathVariable Long id){
+       return libroService.obetenerLibrosPerfil(id);
+    }
 }
