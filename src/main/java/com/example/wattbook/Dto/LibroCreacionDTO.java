@@ -18,5 +18,4 @@ public class LibroCreacionDTO {
     private String generos;
     private Date fechaPublicacion;
 
-    // Getters y setters
 }

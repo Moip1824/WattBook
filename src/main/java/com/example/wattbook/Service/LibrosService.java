@@ -85,4 +85,9 @@ public class LibrosService {
     }
 
 
+    public List<LibroDTO> obetenerLibrosPerfil(Long idAutor){
+       return librosRepository.obtenerLibrosYVotosporidauthor(idAutor);
+    }
+
+
 }

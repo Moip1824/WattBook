@@ -40,7 +40,6 @@ public class LibrosController {
         Usuario autor = usuarioRepository.findById(libroDTO.getAutorId())
                 .orElseThrow(() -> new RuntimeException("Autor no encontrado"));
 
-        // Crear el libro con los datos del DTO
         Libros libro = new Libros();
         libro.setNombre(libroDTO.getNombre());
         libro.setDescripcion(libroDTO.getDescripcion());
@@ -67,5 +66,11 @@ public class LibrosController {
     @GetMapping("/{id}")
     public ResponseEntity<LibroLeerDto> getLibro(@PathVariable Long id) {
         return ResponseEntity.ok(libroService.getLibro(id));
+    }
+
+
+    @GetMapping("/perfil/publicaciones/{id}")
+    public List<LibroDTO> obtenerLibrosPefil(@PathVariable Long id){
+       return libroService.obetenerLibrosPerfil(id);
     }
 }
