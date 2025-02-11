@@ -8,6 +8,8 @@ import com.example.wattbook.Repository.LibrosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ChatService {
 
@@ -27,5 +29,9 @@ public class ChatService {
         chat.setLibroId(libro);
 
         return chatRepository.save(chat);
+    }
+
+    public List<Chat> obtenerTodosLosChats() {
+        return chatRepository.findAll();
     }
 }
