@@ -75,12 +75,9 @@ create table autores_favoritos(
 
 create table if not exists chat(
     id serial primary key,
-    usuario_id int not null,
-    mensaje varchar(255) not null,
-    fecha date not null,
+
     libro_id int not null,
-    foreign key (libro_id) references libros(id),
-    foreign key (usuario_id) references usuario(id)
+    foreign key (libro_id) references libros(id)
 );
 
 create table if not exists comentarios(

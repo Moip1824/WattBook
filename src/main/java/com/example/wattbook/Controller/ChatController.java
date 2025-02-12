@@ -4,10 +4,12 @@ import com.example.wattbook.Dto.ChatDTO;
 import com.example.wattbook.Entity.Chat;
 import com.example.wattbook.Service.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:4200")
+@Controller
 @RestController
 @RequestMapping("/chat")
 public class ChatController {
