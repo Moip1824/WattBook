@@ -2,11 +2,14 @@ package com.example.wattbook.Controller;
 
 import com.example.wattbook.Dto.BaneoDTO;
 import com.example.wattbook.Entity.Usuario;
+import com.example.wattbook.Entity.UsuariosBaneados;
 import com.example.wattbook.Service.UsuarioService;
 import com.example.wattbook.Service.UsuariosBaneadosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -35,4 +38,11 @@ public class UsuariosBaneadosController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/getUsuariosBaneados")
+    public ResponseEntity<List<UsuariosBaneados>> getUsuariosBaneados() {
+        List<UsuariosBaneados> usuariosBaneados = usuariosBaneadosService.getAllUsuariosBaneados();
+        return ResponseEntity.ok(usuariosBaneados);
+    }
+
 }

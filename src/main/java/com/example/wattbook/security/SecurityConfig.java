@@ -49,6 +49,7 @@ public class SecurityConfig {
                         .requestMatchers("/libros-favoritos/yourFaves/{usuarioId}").permitAll()
                         .requestMatchers("/baneados/banearUsuario").permitAll()
                         .requestMatchers("/baneados/eliminarBaneo/{usuarioId}").permitAll()
+                        .requestMatchers("/baneados/getUsuariosBaneados").permitAll()
                         .requestMatchers("/publicacion/**").hasAuthority("PERFIL")
                         .requestMatchers("/aptitud/**").hasAuthority("ADMIN")
 
