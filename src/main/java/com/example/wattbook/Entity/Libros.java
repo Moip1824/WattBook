@@ -8,6 +8,7 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -47,5 +48,21 @@ public class Libros implements Serializable {
     @JsonManagedReference
     @JoinColumn(name = "autor_id", nullable = false)
     private Usuario autorId;
+
+    @OneToMany(mappedBy = "libroId", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
+    private List<LibrosFavoritos> librosFavoritos;
+
+    @OneToMany(mappedBy = "libroId", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
+    private List<Votos> votos;
+
+    @OneToMany(mappedBy = "libroId", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
+    private List<Comentarios> comentarios;
+
+    @OneToMany(mappedBy = "libroId", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
+    private List<Chat> chats;
 
 }

@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface LibrosRepository extends JpaRepository<Libros, Long>, JpaSpecificationExecutor<Libros> {
 
@@ -33,4 +34,16 @@ public interface LibrosRepository extends JpaRepository<Libros, Long>, JpaSpecif
             " GROUP BY l.id, l.nombre, l.descripcion, l.generos, l.imagen, l.autorId.id,a.username " +
             "ORDER BY SUM(CASE WHEN v.tipoVoto = true THEN 1 ELSE 0 END ) DESC")
     List<LibroDTO> obtenerLibrosYVotosporidauthor(@Param("idAutor")Long idAutor);
+
+    @Query("SELECT new com.example.wattbook.Dto.LibroDTO(" +
+            "l.id, l.nombre, l.descripcion, l.generos, l.imagen, l.autorId.id, a.username, " +
+            "COALESCE(SUM(CASE WHEN v.tipoVoto = true THEN 1 ELSE 0 END), 0), " +
+            "COALESCE(SUM(CASE WHEN v.tipoVoto = false THEN 1 ELSE 0 END), 0)) " +
+            "FROM Libros l LEFT JOIN Votos v ON l.id = v.libroId.id " +
+            "LEFT JOIN l.autorId a " +
+            "WHERE l.id = :idLibro " +
+            "GROUP BY l.id, l.nombre, l.descripcion, l.generos, l.imagen, l.autorId.id, a.username")
+    Optional<LibroDTO> obtenerLibroYVotos(@Param("idLibro") Long idLibro);
+
+
 }

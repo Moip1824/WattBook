@@ -68,9 +68,11 @@ public class LibrosService {
     public List<LibroLeerDto> getAllLibros() {
         return librosRepository.findAll().stream().map(this::convDto).collect(Collectors.toList());
     }
-    public LibroLeerDto getLibro(Long id) {
-        return librosRepository.findById(id).map(this::convDto).orElseThrow(() -> new RuntimeException("Libro no encontrado"));
+    public LibroDTO getLibro(Long id) {
+        return librosRepository.obtenerLibroYVotos(id)
+                .orElseThrow(() -> new RuntimeException("Libro no encontrado"));
     }
+
 
     private LibroLeerDto convDto(Libros libro) {
         LibroLeerDto libroDto = new LibroLeerDto();
@@ -82,6 +84,10 @@ public class LibrosService {
         libroDto.setImagen(libro.getImagen());
         libroDto.setAutorId(libro.getAutorId().getId());
         return libroDto;
+    }
+    public void eliminarLibro(Long id) {
+        Libros libro = librosRepository.findById(id).orElseThrow(() -> new RuntimeException("Libro no encontrado"));
+        librosRepository.delete(libro);
     }
 
 

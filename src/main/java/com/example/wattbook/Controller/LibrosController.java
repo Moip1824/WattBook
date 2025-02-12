@@ -33,6 +33,11 @@ public class LibrosController {
     public ResponseEntity<List<LibroDTO>> obtenerLibros() {
         return ResponseEntity.ok(libroService.obtenerLibrosConVotos());
     }
+    @DeleteMapping("/elim/{libroId}")
+    public ResponseEntity<String> eliminarLibro(@PathVariable Long libroId) {
+        libroService.eliminarLibro(libroId);
+        return ResponseEntity.ok("Libro eliminado correctamente");
+    }
 
 
     @PostMapping("/crear")
@@ -64,9 +69,10 @@ public class LibrosController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<LibroLeerDto> getLibro(@PathVariable Long id) {
+    public ResponseEntity<LibroDTO> getLibro(@PathVariable Long id) {
         return ResponseEntity.ok(libroService.getLibro(id));
     }
+
 
 
     @GetMapping("/perfil/publicaciones/{id}")
