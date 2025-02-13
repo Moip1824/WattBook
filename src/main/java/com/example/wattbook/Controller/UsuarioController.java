@@ -48,6 +48,4 @@ public class UsuarioController {
         List<UsuarioDTO> perfiles = usuarioService.getAllPerfiles();
         return ResponseEntity.ok(perfiles);
     }
-
-
 }

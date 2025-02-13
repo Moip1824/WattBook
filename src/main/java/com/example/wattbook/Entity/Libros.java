@@ -59,6 +59,10 @@ public class Libros implements Serializable {
 
     @OneToMany(mappedBy = "libroId", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonBackReference
+    private List<LibrosLeyendo> librosLeyendo;
+
+    @OneToMany(mappedBy = "libroId", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
     private List<Comentarios> comentarios;
 
     @OneToMany(mappedBy = "libroId", cascade = CascadeType.ALL, orphanRemoval = true)
