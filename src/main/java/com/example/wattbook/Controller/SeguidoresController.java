@@ -1,6 +1,7 @@
 package com.example.wattbook.Controller;
 
 import com.example.wattbook.Dto.SeguidorDTO;
+import com.example.wattbook.Dto.UsuarioDTO;
 import com.example.wattbook.Service.ISeguidoresService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +17,10 @@ public class SeguidoresController {
     @Autowired
     private ISeguidoresService seguidoresService;
 
-    @GetMapping("/listaSeguidores")
-    public ResponseEntity<List<SeguidorDTO>> getSeguidores() {
-        List<SeguidorDTO> seguidores = seguidoresService.findAll();
-        return ResponseEntity.ok(seguidores);
+    @GetMapping("/listaSeguidores/{usuarioId}")
+    public ResponseEntity<List<Long>> listaSeguidores(@PathVariable Long usuarioId) {
+        List<Long> seguidoresIds = seguidoresService.getSeguidoresIds(usuarioId);
+        return ResponseEntity.ok(seguidoresIds);
     }
 
     @DeleteMapping("/eliminarSeguidor")
