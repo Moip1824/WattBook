@@ -5,6 +5,7 @@ import com.example.wattbook.Entity.Usuario;
 import com.example.wattbook.Repository.UsuarioRepository;
 import com.example.wattbook.Repository.UsuariosBaneadosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,5 +44,9 @@ public class UsuariosBaneadosService {
 
     public List<UsuariosBaneados> getAllUsuariosBaneados() {
         return usuariosBaneadosRepository.findAll();
+    }
+
+    public Optional<UsuariosBaneados> getUsuarioBaneadoByUsuarioId(Usuario usuarioId) {
+        return usuariosBaneadosRepository.findByUsuarioId(usuarioId);
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -43,6 +44,12 @@ public class UsuariosBaneadosController {
     public ResponseEntity<List<UsuariosBaneados>> getUsuariosBaneados() {
         List<UsuariosBaneados> usuariosBaneados = usuariosBaneadosService.getAllUsuariosBaneados();
         return ResponseEntity.ok(usuariosBaneados);
+    }
+
+    @GetMapping("/getUsuarioBaneado/{usuarioId}")
+    public ResponseEntity<UsuariosBaneados> getUsuarioBaneado(@PathVariable Usuario usuarioId) {
+        Optional<UsuariosBaneados> usuarioBaneado = usuariosBaneadosService.getUsuarioBaneadoByUsuarioId(usuarioId);
+        return usuarioBaneado.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
 }

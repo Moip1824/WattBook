@@ -31,7 +31,9 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(req -> req.requestMatchers("/auth/**").permitAll()
+                .authorizeHttpRequests(req -> req
+                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/votos/**").permitAll()
                         .requestMatchers("/comentarios/**").permitAll()
                         .requestMatchers("/libros/**").permitAll()
@@ -39,6 +41,7 @@ public class SecurityConfig {
                         .requestMatchers("/libros/{id}").permitAll()
                         .requestMatchers("/libros/crear").permitAll()
                         .requestMatchers("/usuario/**").permitAll()
+                        .requestMatchers("/perfil/**").permitAll()
                         .requestMatchers("/libros/MostrarLibros").permitAll()
                         .requestMatchers("/seguidores/anyadirSeguidor").permitAll()
                         .requestMatchers("/seguidores/eliminarSeguidor").permitAll()
@@ -53,6 +56,7 @@ public class SecurityConfig {
                         .requestMatchers("/baneados/banearUsuario").permitAll()
                         .requestMatchers("/baneados/eliminarBaneo/{usuarioId}").permitAll()
                         .requestMatchers("/baneados/getUsuariosBaneados").permitAll()
+                        .requestMatchers("/baneados/getUsuarioBaneado/{usuarioId}").permitAll()
                         .requestMatchers("/publicacion/**").hasAuthority("PERFIL")
                         .requestMatchers("/aptitud/**").hasAuthority("ADMIN")
 
