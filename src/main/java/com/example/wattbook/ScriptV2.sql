@@ -75,7 +75,6 @@ create table autores_favoritos(
 
 create table if not exists chat(
     id serial primary key,
-
     libro_id int not null,
     foreign key (libro_id) references libros(id)
 );
