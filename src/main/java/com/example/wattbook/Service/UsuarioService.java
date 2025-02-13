@@ -121,4 +121,7 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
     private UsuarioDTO convertUsuarioToDTO(Usuario usuario) {
         return new UsuarioDTO(usuario.getId(), usuario.getRol(), usuario.getUsername(), usuario.getPassword());
     }
+
+
+   
 }
