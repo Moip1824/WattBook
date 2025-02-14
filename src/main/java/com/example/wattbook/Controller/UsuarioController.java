@@ -1,6 +1,7 @@
 package com.example.wattbook.Controller;
 
 import com.example.wattbook.Dto.UsuarioDTO;
+import com.example.wattbook.Dto.VerificacionDTO;
 import com.example.wattbook.Entity.Perfil;
 import com.example.wattbook.Entity.Usuario;
 import com.example.wattbook.Service.UsuarioService;
@@ -31,6 +32,17 @@ public class UsuarioController {
         return ResponseEntity.ok(username);
     }
 
+
+    @GetMapping("/{id}/mensaje")
+    public ResponseEntity<String> obtenerUsername(@PathVariable Long id) {
+        String username = usuarioService.obtenerUsernamePorId(id);
+        if (username != null) {
+            return ResponseEntity.ok(username);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @GetMapping("/rol/{id}")
     public ResponseEntity<String> obtenerRolPorId(@PathVariable Long id) {
         Usuario usuario = usuarioService.obtenerUsuarioPorId(id);
@@ -43,9 +55,28 @@ public class UsuarioController {
     }
 
 
+    @PostMapping("/comprobarVerificacion/{id}")
+    public ResponseEntity<Boolean> comprobarVerificacion(@PathVariable Long id) {
+        boolean verificado = usuarioService.comprobarVerificaddo(id);
+        return ResponseEntity.ok(verificado);
+    }
+
+
     @GetMapping("/allPerfiles")
     public ResponseEntity<List<UsuarioDTO>> getAllPerfiles() {
         List<UsuarioDTO> perfiles = usuarioService.getAllPerfiles();
         return ResponseEntity.ok(perfiles);
     }
+
+    @PostMapping("/verificar-codigo")
+    public ResponseEntity<String> verificarCodigo(@RequestBody VerificacionDTO verificacionDTO) {
+        boolean verificado = usuarioService.verificarCodigo(verificacionDTO);
+        if (verificado) {
+            return ResponseEntity.ok("Correo verificado exitosamente");
+        } else {
+            return ResponseEntity.status(400).body("Código de verificación incorrecto");
+        }
+    }
+
+
 }
