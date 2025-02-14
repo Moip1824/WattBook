@@ -73,6 +73,12 @@ public class LibrosController {
         return ResponseEntity.ok(libroService.getLibro(id));
     }
 
+    @GetMapping("/genero/{genero}")
+    public List<LibroLeerDto> obtenerLibrosPorGenero(@PathVariable Genero genero) {
+        return libroService.obtenerLibrosPorGenero(genero);
+    }
+
+
 
 
     @GetMapping("/perfil/publicaciones/{id}")
