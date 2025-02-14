@@ -45,6 +45,12 @@ public class Usuario implements UserDetails {
     @JsonBackReference
     private List<ChatUsuarios> chats;
 
+    // Campos adicionales para la verificación
+    @Column(name = "codigo_verificacion")
+    private String codigoVerificacion; // Código de verificación
+
+    @Column(name = "verificado", nullable = false)
+    private boolean verificado = false; // Estado de verificación del usuario
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -68,13 +74,6 @@ public class Usuario implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return UserDetails.super.isEnabled();
-    }
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+        return this.verificado;
     }
 }
