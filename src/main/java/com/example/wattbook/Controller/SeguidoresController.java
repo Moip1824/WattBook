@@ -24,9 +24,12 @@ public class SeguidoresController {
     }
 
     @DeleteMapping("/eliminarSeguidor")
-    public ResponseEntity<Void> deleteOneSeguidor(@RequestBody Long id) {
-        seguidoresService.deleteById(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<String> deleteOneSeguidor(@RequestBody SeguidorDTO eliminarSeguidorDTO) {
+        Long seguidorId = eliminarSeguidorDTO.getSeguidorId();
+        Long usuarioId = eliminarSeguidorDTO.getUserId();
+
+        seguidoresService.deleteById(seguidorId, usuarioId);
+        return ResponseEntity.ok("Follower with ID " + seguidorId + " for user with ID " + usuarioId + " has been deleted.");
     }
 
     @PostMapping("/anyadirSeguidor")

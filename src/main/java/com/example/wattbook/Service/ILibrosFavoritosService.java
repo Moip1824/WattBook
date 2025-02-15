@@ -8,4 +8,5 @@ public interface ILibrosFavoritosService {
     void deleteById(Long id);
     LibrosFavoritosDTO addLibroFavorito(LibrosFavoritosDTO libroFavoritoDTO);
     List<LibrosFavoritosDTO> findByUsuarioId(Long usuarioId);
+    void deleteByUserIdAndLibroId(Long userId, Long libroId);
 }

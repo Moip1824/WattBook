@@ -49,7 +49,7 @@ public class SecurityConfig {
                         .requestMatchers("/seguidores/listaSeguidores/{usuarioId}").permitAll()
                         .requestMatchers("/libros-favoritos/anyadirLibroFavorito").permitAll()
                         .requestMatchers("/libros-favoritos/listaLibros").permitAll()
-                        .requestMatchers("/libros-favoritos/eliminarLibroFavorito").permitAll()
+                        .requestMatchers("/libros-favoritos/eliminarLibroFav").permitAll()
                         .requestMatchers("/usuario/{id}/perfil").permitAll()
                         .requestMatchers("/usuario/allPerfiles").permitAll()
                         .requestMatchers("/libros-favoritos/yourFaves/{usuarioId}").permitAll()
