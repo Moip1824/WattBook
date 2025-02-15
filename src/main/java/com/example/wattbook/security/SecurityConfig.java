@@ -49,7 +49,7 @@ public class SecurityConfig {
                         .requestMatchers("/seguidores/listaSeguidores/{usuarioId}").permitAll()
                         .requestMatchers("/libros-favoritos/anyadirLibroFavorito").permitAll()
                         .requestMatchers("/libros-favoritos/listaLibros").permitAll()
-                        .requestMatchers("/libros-favoritos/eliminarLibroFavorito").permitAll()
+                        .requestMatchers("/libros-favoritos/eliminarLibroFav").permitAll()
                         .requestMatchers("/usuario/{id}/perfil").permitAll()
                         .requestMatchers("/usuario/allPerfiles").permitAll()
                         .requestMatchers("/usuario/verificar-codigo").permitAll()
@@ -58,6 +58,7 @@ public class SecurityConfig {
                         .requestMatchers("/baneados/eliminarBaneo/{usuarioId}").permitAll()
                         .requestMatchers("/baneados/getUsuariosBaneados").permitAll()
                         .requestMatchers("/baneados/getUsuarioBaneado/{usuarioId}").permitAll()
+
                         .requestMatchers("/publicacion/**").hasAuthority("PERFIL")
                         .requestMatchers("/aptitud/**").hasAuthority("ADMIN")
 

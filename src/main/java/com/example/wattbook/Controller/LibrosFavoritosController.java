@@ -23,8 +23,11 @@ public class LibrosFavoritosController {
     }
 
     @DeleteMapping("/eliminarLibroFav")
-    public ResponseEntity<Void> deleteOneLibroFavorito(@RequestBody Long id) {
-        librosFavoritosService.deleteById(id);
+    public ResponseEntity<Void> deleteOneLibroFavorito(@RequestBody LibrosFavoritosDTO libroFavoritoDTO) {
+        if (libroFavoritoDTO.getUserId() == null || libroFavoritoDTO.getLibroId() == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        librosFavoritosService.deleteByUserIdAndLibroId(libroFavoritoDTO.getUserId(), libroFavoritoDTO.getLibroId());
         return ResponseEntity.noContent().build();
     }
 
