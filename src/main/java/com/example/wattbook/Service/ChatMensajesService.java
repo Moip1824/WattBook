@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ChatMensajesService {
@@ -49,9 +50,20 @@ public class ChatMensajesService {
         return chatMensajesRepository.findByChatId(chatId);
     }
 
-    public List<ChatMensajes> obtenerMensajesDeChat(Long chatId) {
+    public List<ChatMensajesDTO> obtenerMensajesDeChat(Long chatId) {
         Chat chat = chatRepository.findById(chatId)
                 .orElseThrow(() -> new RuntimeException("Chat no encontrado"));
-        return chatMensajesRepository.findByChatId(chat);
+
+        List<ChatMensajes> mensajes = chatMensajesRepository.findByChatId(chat);
+
+        return mensajes.stream()
+                .map(m -> ChatMensajesDTO.builder()
+                        .id(m.getId())
+                        .fecha(m.getFecha())
+                        .mensaje(m.getMensaje())
+                        .chatId(m.getChatId().getId())
+                        .usuarioId(m.getUsuarioId().getId()) // Solo el ID del usuario
+                        .build())
+                .collect(Collectors.toList());
     }
 }

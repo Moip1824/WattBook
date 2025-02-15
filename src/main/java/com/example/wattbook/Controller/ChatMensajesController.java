@@ -33,7 +33,7 @@ public class ChatMensajesController {
     }
 
     @GetMapping("/chat/{chatId}")
-    public List<ChatMensajes> obtenerMensajesDeChat(@PathVariable Long chatId) {
+    public List<ChatMensajesDTO> obtenerMensajesDeChat(@PathVariable Long chatId) {
         return chatMensajesService.obtenerMensajesDeChat(chatId);
     }
 
