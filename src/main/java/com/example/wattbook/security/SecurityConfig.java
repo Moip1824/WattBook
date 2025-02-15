@@ -58,6 +58,7 @@ public class SecurityConfig {
                         .requestMatchers("/baneados/eliminarBaneo/{usuarioId}").permitAll()
                         .requestMatchers("/baneados/getUsuariosBaneados").permitAll()
                         .requestMatchers("/baneados/getUsuarioBaneado/{usuarioId}").permitAll()
+
                         .requestMatchers("/publicacion/**").hasAuthority("PERFIL")
                         .requestMatchers("/aptitud/**").hasAuthority("ADMIN")
 
