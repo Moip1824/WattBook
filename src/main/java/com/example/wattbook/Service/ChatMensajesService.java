@@ -48,4 +48,10 @@ public class ChatMensajesService {
     public List<ChatMensajes> verMensajesDeChat(Chat chatId) {
         return chatMensajesRepository.findByChatId(chatId);
     }
+
+    public List<ChatMensajes> obtenerMensajesDeChat(Long chatId) {
+        Chat chat = chatRepository.findById(chatId)
+                .orElseThrow(() -> new RuntimeException("Chat no encontrado"));
+        return chatMensajesRepository.findByChatId(chat);
+    }
 }
