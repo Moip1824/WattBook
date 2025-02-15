@@ -1,9 +1,6 @@
 package com.example.wattbook.Service;
 
-import com.example.wattbook.Dto.LoginDTO;
-import com.example.wattbook.Dto.RegistroDTO;
-import com.example.wattbook.Dto.RespuestaDTO;
-import com.example.wattbook.Dto.UsuarioDTO;
+import com.example.wattbook.Dto.*;
 import com.example.wattbook.Entity.Perfil;
 import com.example.wattbook.Entity.Usuario;
 import com.example.wattbook.Repository.UsuarioRepository;
@@ -24,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,6 +35,9 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
 
     @Autowired
     private PerfilRepository perfilRepository;
+
+    @Autowired
+    private EmailService emailService;
 
     public Perfil obtenerPerfil(Long usuarioId) {
         return perfilRepository.findByUsuarioId(usuarioId)
@@ -63,15 +64,60 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
         perfil.setImagen(dto.getImagen());
         perfil.setEmail(dto.getEmail());
 
+        String codigoVerificacion = generarCodigoVerificacion();
+        nuevoUsuario.setCodigoVerificacion(codigoVerificacion);
+        nuevoUsuario.setVerificado(false);
+
+
         Usuario usuarioGuardado = usuarioRepository.save(nuevoUsuario);
 
 
         perfil.setUsuario(usuarioGuardado);
-        Perfil perfilGuardado = perfilService.guardarPerfil(perfil);
+        perfilService.guardarPerfil(perfil);
+
+
+
+
+        emailService.enviarCodigoVerificacion(perfil.getEmail(), codigoVerificacion);
 
 
         return usuarioGuardado;
     }
+
+    private String generarCodigoVerificacion() {
+        Random random = new Random();
+        int codigo = 100000 + random.nextInt(900000);
+        return String.valueOf(codigo);
+    }
+
+    public String obtenerUsernamePorId(Long id) {
+        Optional<Usuario> usuario = usuarioRepository.findById(id);
+        return usuario.map(Usuario::getUsername).orElse(null);
+    }
+
+
+    public boolean comprobarVerificaddo(Long id) {
+        Usuario usuario = usuarioRepository.findById(id).orElse(null);
+        if (usuario.isVerificado()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    public boolean verificarCodigo(VerificacionDTO verificacionDTO) {
+        Usuario usuario = usuarioRepository.findByUsername(verificacionDTO.getUsername());
+        if (usuario != null && usuario.getCodigoVerificacion().equals(verificacionDTO.getCodigoVerificacion())) {
+            usuario.setVerificado(true);
+            usuarioRepository.save(usuario);
+            return true;
+        }
+        return false;
+    }
+
+
+
     public Usuario obtenerUsuarioPorId(Long id) {
         return usuarioRepository.findById(id).orElse(null);
     }
@@ -82,8 +128,7 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
         return usuarioOptional.orElse(null);
     }
 
-    public ResponseEntity<RespuestaDTO> login(LoginDTO dto){
-
+    public ResponseEntity<RespuestaDTO> login(LoginDTO dto) {
         Optional<Usuario> usuarioOpcional = usuarioRepository.findTopByUsername(dto.getUsername());
 
         if (usuarioOpcional.isPresent()) {
@@ -93,18 +138,19 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
 
                 String token = jwtService.generateToken(usuario);
                 return ResponseEntity
-                        .ok(RespuestaDTO
-                                .builder()
+                        .ok(RespuestaDTO.builder()
                                 .estado(HttpStatus.OK.value())
-                                .token(token).build());
+                                .token(token)
+                                .mensaje("Inicio de sesión exitoso")
+                                .build());
             } else {
                 throw new BadCredentialsException("Contraseña incorrecta");
             }
         } else {
             throw new UsernameNotFoundException("Usuario no encontrado");
         }
-
     }
+
     public String getUsernameById(Long authorId) {
         return usuarioRepository.findById(authorId)
                 .map(Usuario::getUsername)
@@ -123,5 +169,5 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
     }
 
 
-   
+
 }
