@@ -1,12 +1,13 @@
 package com.example.wattbook.Service;
 
 import com.example.wattbook.Dto.SeguidorDTO;
-import com.example.wattbook.Dto.UsuarioDTO;
-import com.example.wattbook.Entity.Usuario;
+import com.example.wattbook.Entity.Seguidores;
+import com.example.wattbook.Repository.SeguidoresRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.example.wattbook.Repository.SeguidoresRepository;
-import com.example.wattbook.Entity.Seguidores;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,16 +20,8 @@ public class SeguidoresService implements ISeguidoresService {
     private SeguidoresRepository seguidoresRepository;
     @Autowired
     private UsuarioService usuarioService;
+    private static final Logger logger = LoggerFactory.getLogger(SeguidoresService.class);
 
-    @Override
-    public List<SeguidorDTO> findAll() {
-        return seguidoresRepository.findAll().stream().map(this::convertSeguidorToDTO).collect(Collectors.toList());
-    }
-
-    @Override
-    public void deleteById(Long id) {
-        seguidoresRepository.deleteById(id);
-    }
 
     @Override
     public SeguidorDTO addSeguidor(SeguidorDTO seguidorDTO) {
@@ -48,14 +41,30 @@ public class SeguidoresService implements ISeguidoresService {
     }
 
     @Override
-    public List<SeguidorDTO> findByUsuarioId(Long usuarioId) {
-        List<Seguidores> seguidoresList = seguidoresRepository.findByUsuarioId(usuarioId);
-        List<SeguidorDTO> seguidoresDTOList = new ArrayList<>();
-        for (Seguidores seguidor : seguidoresList) {
-            seguidoresDTOList.add(convertSeguidorToDTO(seguidor));
-        }
-        return seguidoresDTOList;
+    @Transactional
+    public void deleteById(Long seguidorId, Long usuarioId) {
+        seguidoresRepository.deleteByUsuarioIdAndSeguidorId(usuarioId, seguidorId);
     }
+
+
+    @Override
+    public List<SeguidorDTO> findByUsuarioId(Long usuarioId) {
+        List<Seguidores> seguidores = seguidoresRepository.findByUsuarioId(usuarioId);
+        return seguidores.stream()
+                .map(seguidor -> new SeguidorDTO(seguidor.getUsuarioId(), seguidor.getSeguidorId()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<SeguidorDTO> findBySeguidorId(Long seguidorId) {
+        logger.info("Finding seguidores by seguidorId: {}", seguidorId);
+        List<Seguidores> seguidores = seguidoresRepository.findBySeguidorId(seguidorId);
+        logger.info("Found seguidores: {}", seguidores);
+        return seguidores.stream()
+                .map(seguidor -> new SeguidorDTO(seguidor.getUsuarioId(), seguidor.getSeguidorId()))
+                .collect(Collectors.toList());
+    }
+
     private SeguidorDTO convertSeguidorToDTO(Seguidores seguidor) {
         return new SeguidorDTO(seguidor.getUsuarioId(), seguidor.getSeguidorId());
     }

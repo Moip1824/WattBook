@@ -24,9 +24,12 @@ public class SeguidoresController {
     }
 
     @DeleteMapping("/eliminarSeguidor")
-    public ResponseEntity<Void> deleteOneSeguidor(@RequestBody Long id) {
-        seguidoresService.deleteById(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<String> deleteOneSeguidor(@RequestBody SeguidorDTO eliminarSeguidorDTO) {
+        Long seguidorId = eliminarSeguidorDTO.getSeguidorId();
+        Long usuarioId = eliminarSeguidorDTO.getUserId();
+
+        seguidoresService.deleteById(seguidorId, usuarioId);
+        return ResponseEntity.ok("Follower with ID " + seguidorId + " for user with ID " + usuarioId + " has been deleted.");
     }
 
     @PostMapping("/anyadirSeguidor")
@@ -38,9 +41,9 @@ public class SeguidoresController {
         return ResponseEntity.ok(nuevoSeguidor);
     }
 
-    @GetMapping("/tusSeguidos/{usuarioId}")
-    public ResponseEntity<List<SeguidorDTO>> getSeguidoresByUsuarioId(@PathVariable Long usuarioId) {
-        List<SeguidorDTO> seguidores = seguidoresService.findByUsuarioId(usuarioId);
-        return ResponseEntity.ok(seguidores);
+    @GetMapping("/tusSeguidos/{seguidorId}")
+    public ResponseEntity<List<SeguidorDTO>> getUsuariosPorSeguidorId(@PathVariable Long seguidorId) {
+        List<SeguidorDTO> usuarios = seguidoresService.findBySeguidorId(seguidorId);
+        return ResponseEntity.ok(usuarios);
     }
 }
