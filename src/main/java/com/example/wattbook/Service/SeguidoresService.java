@@ -32,6 +32,7 @@ public class SeguidoresService implements ISeguidoresService {
         return convertSeguidorToDTO(seguidoresRepository.save(seguidor));
     }
 
+
     @Override
     public List<Long> getSeguidoresIds(Long usuarioId) {
         return seguidoresRepository.findByUsuarioId(usuarioId)
