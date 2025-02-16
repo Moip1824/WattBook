@@ -22,8 +22,8 @@ public class ChatController {
         return chatService.crearChat(chatDTO);
     }
 
-    @GetMapping("/listar")
-    public List<Chat> obtenerChats() {
-        return chatService.obtenerTodosLosChats();
+    @GetMapping("/listar/{usuarioId}")
+    public List<Chat> obtenerChatsPorUsuario(@PathVariable Long usuarioId) {
+        return chatService.obtenerChatsPorUsuario(usuarioId);
     }
 }

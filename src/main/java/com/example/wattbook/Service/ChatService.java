@@ -31,7 +31,7 @@ public class ChatService {
         return chatRepository.save(chat);
     }
 
-    public List<Chat> obtenerTodosLosChats() {
-        return chatRepository.findAll();
+    public List<Chat> obtenerChatsPorUsuario(Long usuarioId) {
+        return chatRepository.findChatsByUsuario(usuarioId);
     }
 }
