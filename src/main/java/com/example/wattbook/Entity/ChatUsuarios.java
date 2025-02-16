@@ -17,6 +17,7 @@ public class ChatUsuarios implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
 
+
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuarioId;
