@@ -3,10 +3,9 @@ package com.example.wattbook.Service;
 import com.example.wattbook.Dto.ComentarioDto;
 import com.example.wattbook.Entity.Comentarios;
 import com.example.wattbook.Entity.Libros;
+import com.example.wattbook.Entity.Perfil;
 import com.example.wattbook.Entity.Usuario;
-import com.example.wattbook.Repository.ComentariosRepository;
-import com.example.wattbook.Repository.LibrosRepository;
-import com.example.wattbook.Repository.UsuarioRepository;
+import com.example.wattbook.Repository.*;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +25,8 @@ public class ComentariosService implements IComentariosService {
     private UsuarioRepository usuarioRepository;
     @Autowired
     private LibrosRepository librosRepository;
+    @Autowired
+    private PerfilRepository perfilRepository;
 
     public List<ComentarioDto> getAllComentarios() {
         return comentariosRepository.findAll().stream().map(this::convDto).collect(Collectors.toList());
@@ -59,7 +60,13 @@ public class ComentariosService implements IComentariosService {
         comentarioDto.setLibroId(comentario.getLibroId().getId());
         comentarioDto.setComentario(comentario.getComentario());
         comentarioDto.setFecha(comentario.getFecha());
+        Perfil perfil = perfilRepository.findByUsuario_Id(comentario.getUsuarioId().getId());
+        comentarioDto.setImagen(perfil != null ? perfil.getImagen() : null);
         return comentarioDto;
+    }
+
+    public long contarComentariosPorLibro(Long libroId) {
+        return comentariosRepository.countByLibroId(libroId);
     }
 
 }

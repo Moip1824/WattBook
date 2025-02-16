@@ -37,6 +37,7 @@ public class Comentarios implements Serializable {
     @Column(name = "fecha")
     private Date fecha;
 
+
     @PrePersist
     protected void onCreate() {
         if (this.fecha == null) {

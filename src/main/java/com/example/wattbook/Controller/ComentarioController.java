@@ -27,7 +27,6 @@ public class ComentarioController {
     public ResponseEntity<Map<String, String>> agregarComentario(@RequestBody ComentarioDto comentarioDto) {
         comentariosService.agregarComentario(comentarioDto);
 
-        // Devolvemos un JSON válido en lugar de solo un string
         return ResponseEntity.ok(Collections.singletonMap("mensaje", "Comentario agregado"));
     }
 
@@ -36,6 +35,12 @@ public class ComentarioController {
     public ResponseEntity<List<ComentarioDto>> obtenerComentariosPorLibro(@PathVariable Long libroId) {
         List<ComentarioDto> comentarios = comentariosService.obtenerComentariosPorLibro(libroId);
         return ResponseEntity.ok(comentarios);
+    }
+
+    @GetMapping("/cont/{libroId}")
+    public ResponseEntity<Long> contarComentarios(@PathVariable Long libroId) {
+        long count = comentariosService.contarComentariosPorLibro(libroId);
+        return ResponseEntity.ok(count);
     }
 
 

@@ -12,6 +12,7 @@ import java.util.Date;
 public class ComentarioDto {
     private Long usuarioId;
     private String username;
+    private String imagen;
     private Long libroId;
     private String comentario;
     private Date fecha;

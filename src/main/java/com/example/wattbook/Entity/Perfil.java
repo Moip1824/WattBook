@@ -34,7 +34,7 @@ public class Perfil implements Serializable {
     @Column(name = "descripcion")
     private String descripcion;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(columnDefinition = "TEXT", name = "imagen")
