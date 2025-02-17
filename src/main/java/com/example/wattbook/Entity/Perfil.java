@@ -40,9 +40,11 @@ public class Perfil implements Serializable {
     @Column(columnDefinition = "TEXT", name = "imagen")
     private String imagen;
 
+
     @Enumerated(EnumType.STRING)
-    @Column(name = "generos")
+    @Column(name = "generos",nullable = false)
     private Genero generos;
+
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")

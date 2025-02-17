@@ -5,6 +5,7 @@ import com.example.wattbook.Dto.RegistroDTO;
 import com.example.wattbook.Dto.RespuestaDTO;
 import com.example.wattbook.Entity.Perfil;
 import com.example.wattbook.Entity.Usuario;
+import com.example.wattbook.Enums.Genero;
 import com.example.wattbook.Repository.UsuarioRepository;
 import com.example.wattbook.security.JWTService;
 import com.example.wattbook.Enums.Rol;
@@ -44,31 +45,29 @@ public class UsuarioService implements UserDetailsService {
         return usuarioRepository.findTopByUsername(username).orElse(null);
     }
 
-    public Usuario registrarUsuario(RegistroDTO dto){
+    public Usuario registrarUsuario(RegistroDTO dto) {
 
         Usuario nuevoUsuario = new Usuario();
         nuevoUsuario.setUsername(dto.getUsername());
         nuevoUsuario.setPassword(passwordEncoder.encode(dto.getPassword()));
         nuevoUsuario.setRol(Rol.USUARIO);
 
-
         Perfil perfil = new Perfil();
         perfil.setNombre(dto.getNombre());
         perfil.setApellidos(dto.getApellidos());
         perfil.setDescripcion(dto.getDescripcion());
-        perfil.setGeneros(dto.getGeneros());
+        perfil.setGeneros(Genero.valueOf(dto.getGeneros()));
         perfil.setImagen(dto.getImagen());
         perfil.setEmail(dto.getEmail());
 
         Usuario usuarioGuardado = usuarioRepository.save(nuevoUsuario);
 
-
         perfil.setUsuario(usuarioGuardado);
         Perfil perfilGuardado = perfilService.guardarPerfil(perfil);
 
-
         return usuarioGuardado;
     }
+
     public Usuario obtenerUsuarioPorId(Long id) {
         return usuarioRepository.findById(id).orElse(null);
     }
