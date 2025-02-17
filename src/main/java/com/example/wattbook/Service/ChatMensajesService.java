@@ -4,9 +4,11 @@ import com.example.wattbook.Dto.ChatMensajesDTO;
 import com.example.wattbook.Dto.ChatUsuariosDTO;
 import com.example.wattbook.Entity.Chat;
 import com.example.wattbook.Entity.ChatMensajes;
+import com.example.wattbook.Entity.Perfil;
 import com.example.wattbook.Entity.Usuario;
 import com.example.wattbook.Repository.ChatMensajesRepository;
 import com.example.wattbook.Repository.ChatRepository;
+import com.example.wattbook.Repository.PerfilRepository;
 import com.example.wattbook.Repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,9 @@ public class ChatMensajesService {
 
     @Autowired
     private ChatRepository chatRepository;
+
+    @Autowired
+    private PerfilRepository perfilRepository;
 
     public ChatMensajes crearMensaje(ChatMensajesDTO chatMensajesDTO) {
 
@@ -57,13 +62,18 @@ public class ChatMensajesService {
         List<ChatMensajes> mensajes = chatMensajesRepository.findByChatId(chat);
 
         return mensajes.stream()
-                .map(m -> ChatMensajesDTO.builder()
-                        .id(m.getId())
-                        .fecha(m.getFecha())
-                        .mensaje(m.getMensaje())
-                        .chatId(m.getChatId().getId())
-                        .usuarioId(m.getUsuarioId().getId()) // Solo el ID del usuario
-                        .build())
+                .map(m -> {
+                    Usuario usuario = m.getUsuarioId();
+                    Perfil perfil = perfilRepository.findByUsuario_Id(usuario.getId());
+                    return ChatMensajesDTO.builder()
+                            .id(m.getId())
+                            .fecha(m.getFecha())
+                            .mensaje(m.getMensaje())
+                            .chatId(m.getChatId().getId())
+                            .usuarioId(usuario.getId())
+                            .imagen(perfil.getImagen())
+                            .build();
+                })
                 .collect(Collectors.toList());
     }
 }

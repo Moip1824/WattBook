@@ -18,5 +18,6 @@ public class ChatMensajesDTO {
     private String mensaje;
     private Long chatId;
     private Long usuarioId;
+    private String imagen;
 
 }

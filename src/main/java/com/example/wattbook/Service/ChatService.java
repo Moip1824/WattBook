@@ -34,4 +34,18 @@ public class ChatService {
     public List<Chat> obtenerChatsPorUsuario(Long usuarioId) {
         return chatRepository.findChatsByUsuario(usuarioId);
     }
+
+    public ChatDTO obtenerChatPorId(Long chatId) {
+        Chat chat = chatRepository.findById(chatId)
+                .orElseThrow(() -> new RuntimeException("Chat no encontrado"));
+
+        return ChatDTO.builder()
+                .id(chat.getId())
+                .nombre(chat.getNombre())
+                .descripcion(chat.getDescripcion())
+                .imagen(chat.getImagen())
+                .libroId(chat.getLibroId().getId())
+                .build();
+    }
+
 }

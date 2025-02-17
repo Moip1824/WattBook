@@ -26,4 +26,9 @@ public class ChatController {
     public List<Chat> obtenerChatsPorUsuario(@PathVariable Long usuarioId) {
         return chatService.obtenerChatsPorUsuario(usuarioId);
     }
+
+    @GetMapping("/{chatId}")
+    public ChatDTO obtenerChatPorId(@PathVariable Long chatId) {
+        return chatService.obtenerChatPorId(chatId);
+    }
 }
