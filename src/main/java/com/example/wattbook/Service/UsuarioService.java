@@ -57,6 +57,7 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
         nuevoUsuario.setRol(Rol.USUARIO);
 
 
+
         Perfil perfil = new Perfil();
         perfil.setNombre(dto.getNombre());
         perfil.setApellidos(dto.getApellidos());
