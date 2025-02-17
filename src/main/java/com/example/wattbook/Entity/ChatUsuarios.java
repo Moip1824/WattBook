@@ -1,5 +1,6 @@
 package com.example.wattbook.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -20,9 +21,11 @@ public class ChatUsuarios implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
+    @JsonIgnore
     private Usuario usuarioId;
 
     @ManyToOne
     @JoinColumn(name = "chat_id", nullable = false)
+    @JsonIgnore
     private Chat chatId;
 }
