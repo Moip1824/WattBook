@@ -8,4 +8,5 @@ import java.util.Optional;
 
 public interface PerfilRepository extends JpaRepository<Perfil, Long>, JpaSpecificationExecutor<Perfil> {
     Optional<Perfil> findByUsuarioId(Long usuarioId);
+    Perfil findByUsuario_Id(Long usuarioId);
 }

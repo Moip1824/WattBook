@@ -33,7 +33,6 @@ public class SecurityConfig {
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req -> req
                         .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/votos/**").permitAll()
                         .requestMatchers("/comentarios/**").permitAll()
                         .requestMatchers("/libros/**").permitAll()
@@ -51,14 +50,15 @@ public class SecurityConfig {
                         .requestMatchers("/libros-favoritos/listaLibros").permitAll()
                         .requestMatchers("/libros-favoritos/eliminarLibroFav").permitAll()
                         .requestMatchers("/usuario/{id}/perfil").permitAll()
-                        .requestMatchers("/usuario/allPerfiles").permitAll()
-                        .requestMatchers("/usuario/verificar-codigo").permitAll()
                         .requestMatchers("/libros-favoritos/yourFaves/{usuarioId}").permitAll()
                         .requestMatchers("/baneados/banearUsuario").permitAll()
                         .requestMatchers("/baneados/eliminarBaneo/{usuarioId}").permitAll()
                         .requestMatchers("/baneados/getUsuariosBaneados").permitAll()
                         .requestMatchers("/baneados/getUsuarioBaneado/{usuarioId}").permitAll()
 
+                        .requestMatchers("/chat/**").permitAll()
+                        .requestMatchers("/chatusuario/**").permitAll()
+                        .requestMatchers("/chatmensaje/**").permitAll()
                         .requestMatchers("/publicacion/**").hasAuthority("PERFIL")
                         .requestMatchers("/aptitud/**").hasAuthority("ADMIN")
 

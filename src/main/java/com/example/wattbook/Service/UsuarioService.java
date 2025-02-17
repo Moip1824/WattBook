@@ -3,6 +3,7 @@ package com.example.wattbook.Service;
 import com.example.wattbook.Dto.*;
 import com.example.wattbook.Entity.Perfil;
 import com.example.wattbook.Entity.Usuario;
+import com.example.wattbook.Enums.Genero;
 import com.example.wattbook.Repository.UsuarioRepository;
 import com.example.wattbook.security.JWTService;
 import com.example.wattbook.Enums.Rol;
@@ -60,7 +61,7 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
         perfil.setNombre(dto.getNombre());
         perfil.setApellidos(dto.getApellidos());
         perfil.setDescripcion(dto.getDescripcion());
-        perfil.setGeneros(dto.getGeneros());
+        perfil.setGeneros(Genero.valueOf(dto.getGeneros()));
         perfil.setImagen(dto.getImagen());
         perfil.setEmail(dto.getEmail());
 
@@ -149,8 +150,8 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
         } else {
             throw new UsernameNotFoundException("Usuario no encontrado");
         }
-    }
 
+    }
     public String getUsernameById(Long authorId) {
         return usuarioRepository.findById(authorId)
                 .map(Usuario::getUsername)
