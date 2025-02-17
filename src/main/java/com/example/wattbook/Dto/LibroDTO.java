@@ -1,11 +1,15 @@
 package com.example.wattbook.Dto;
 
 import com.example.wattbook.Enums.Genero;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
+@Data
 public class LibroDTO {
     private Long id;
     private String nombre;
@@ -16,6 +20,7 @@ public class LibroDTO {
     private Long likes;
     private Long dislikes;
     private String username;
+    private LocalDate fechaPublicacion;
 
 
     public LibroDTO() {
@@ -97,4 +102,13 @@ public class LibroDTO {
     public void setDislikes(Long dislikes) {
         this.dislikes = dislikes;
     }
+
+    public LocalDate getFechaPublicacion() {
+        return fechaPublicacion;
+    }
+
+    public void setFechaPublicacion(LocalDate fechaPublicacion) {
+        this.fechaPublicacion = fechaPublicacion;
+    }
+
 }

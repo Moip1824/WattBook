@@ -69,8 +69,20 @@ public class LibrosService {
         return librosRepository.findAll().stream().map(this::convDto).collect(Collectors.toList());
     }
     public LibroDTO getLibro(Long id) {
-        return librosRepository.obtenerLibroYVotos(id)
+        Libros libro = librosRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Libro no encontrado"));
+
+        LibroDTO libroDTO = new LibroDTO();
+        libroDTO.setId(libro.getId());
+        libroDTO.setNombre(libro.getNombre());
+        libroDTO.setDescripcion(libro.getDescripcion());
+        libroDTO.setImagen(libro.getImagen());
+        libroDTO.setGeneros(libro.getGeneros().name());
+        libroDTO.setFechaPublicacion(libro.getFechaPublicacion().toLocalDate());
+        libroDTO.setAutorId(libro.getAutorId().getId());
+        libroDTO.setUsername(libro.getAutorId().getUsername());
+
+        return libroDTO;
     }
 
 
