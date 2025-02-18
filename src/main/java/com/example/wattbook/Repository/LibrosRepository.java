@@ -35,16 +35,5 @@ public interface LibrosRepository extends JpaRepository<Libros, Long>, JpaSpecif
             "ORDER BY SUM(CASE WHEN v.tipoVoto = true THEN 1 ELSE 0 END ) DESC")
     List<LibroDTO> obtenerLibrosYVotosporidauthor(@Param("idAutor")Long idAutor);
 
-    @Query("SELECT new com.example.wattbook.Dto.LibroDTO(" +
-            "l.id, l.nombre, l.descripcion, l.generos, l.imagen, l.autorId.id, a.username, " +
-            "CAST(COALESCE(SUM(CASE WHEN v.tipoVoto = true THEN 1 ELSE 0 END), 0) AS long), " +
-            "CAST(COALESCE(SUM(CASE WHEN v.tipoVoto = false THEN 1 ELSE 0 END), 0) AS long)) " +
-            "FROM Libros l LEFT JOIN Votos v ON l.id = v.libroId.id " +
-            "LEFT JOIN l.autorId a " +
-            "WHERE l.id = :idLibro " +
-            "GROUP BY l.id, l.nombre, l.descripcion, l.generos, l.imagen, l.autorId.id, a.username")
-    Optional<LibroDTO> obtenerLibroYVotos(@Param("idLibro") Long idLibro);
-
-
 
 }

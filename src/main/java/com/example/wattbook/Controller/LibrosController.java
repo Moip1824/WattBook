@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://wattbook.onrender.com")
 @RestController
 @RequestMapping("/libros")
 public class LibrosController {
@@ -45,7 +45,6 @@ public class LibrosController {
         Usuario autor = usuarioRepository.findById(libroDTO.getAutorId())
                 .orElseThrow(() -> new RuntimeException("Autor no encontrado"));
 
-        // Crear el libro con los datos del DTO
         Libros libro = new Libros();
         libro.setNombre(libroDTO.getNombre());
         libro.setDescripcion(libroDTO.getDescripcion());

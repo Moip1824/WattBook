@@ -24,8 +24,7 @@ public class EmailService {
         MimeMessageHelper helper;
         try {
             helper = new MimeMessageHelper(mensaje, true);
-            helper.setFrom(senderEmail); // Especificamos el remitente aquí
-            helper.setTo(destinatario);
+            helper.setFrom(senderEmail);
             helper.setSubject("Código de Verificación");
             helper.setText("Tu código de verificación es: " + codigoVerificacion);
 
