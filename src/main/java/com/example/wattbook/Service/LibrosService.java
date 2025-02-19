@@ -6,6 +6,7 @@ import com.example.wattbook.Dto.UsuarioDTO;
 import com.example.wattbook.Entity.Libros;
 import com.example.wattbook.Entity.Usuario;
 import com.example.wattbook.Entity.Votos;
+import com.example.wattbook.Enums.Genero;
 import com.example.wattbook.Repository.LibrosRepository;
 import com.example.wattbook.Repository.UsuarioRepository;
 import com.example.wattbook.Repository.VotosRepository;
@@ -106,6 +107,13 @@ public class LibrosService {
     public List<LibroDTO> obetenerLibrosPerfil(Long idAutor){
        return librosRepository.obtenerLibrosYVotosporidauthor(idAutor);
     }
+
+    public List<LibroLeerDto> obtenerLibrosPorGenero(Genero genero) {
+        return librosRepository.findByGeneros(genero).stream()
+                .map(this::convDto)
+                .collect(Collectors.toList());
+    }
+
 
 
 }
