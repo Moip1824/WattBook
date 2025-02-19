@@ -12,7 +12,6 @@ public class CorsConfig implements WebMvcConfigurer {
         registry
                 .addMapping("/ws/*")
                 .allowedOrigins("https://frontend-932v.onrender.com")
-                .allowedMethods("");
-
+                .allowedMethods("GET", "POST", "PUT", "DELETE");
     }
 }
