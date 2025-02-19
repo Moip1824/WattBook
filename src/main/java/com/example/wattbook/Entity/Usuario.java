@@ -26,7 +26,6 @@ public class Usuario implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @Column(name = "username", nullable = false, unique = true)
     private String username;
 
@@ -45,17 +44,17 @@ public class Usuario implements UserDetails {
     @JsonBackReference
     private List<ChatUsuarios> chats;
 
+    // Campos adicionales para la verificación
     @Column(name = "codigo_verificacion")
-    private String codigoVerificacion;
+    private String codigoVerificacion; // Código de verificación
 
     @Column(name = "verificado", nullable = false)
-    private boolean verificado = false;
+    private boolean verificado = false; // Estado de verificación del usuario
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singletonList(new SimpleGrantedAuthority(this.rol.name()));
     }
-
 
     @Override
     public boolean isAccountNonExpired() {
@@ -75,5 +74,14 @@ public class Usuario implements UserDetails {
     @Override
     public boolean isEnabled() {
         return this.verificado;
+    }
+    @Override
+    public String getUsername() {
+        return this.username;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
     }
 }

@@ -9,7 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:4200/api")
+@CrossOrigin(origins = "https://frontend-932v.onrender.com/api")
 @RestController
 @RequestMapping("/auth")
 @AllArgsConstructor

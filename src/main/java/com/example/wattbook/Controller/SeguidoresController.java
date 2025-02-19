@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://wattbook.onrender.com")
 @RestController
 @RequestMapping("/seguidores")
 public class SeguidoresController {
