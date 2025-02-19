@@ -25,12 +25,15 @@ public class EmailService {
         try {
             helper = new MimeMessageHelper(mensaje, true);
             helper.setFrom(senderEmail);
+            helper.setTo(destinatario);
             helper.setSubject("Código de Verificación");
             helper.setText("Tu código de verificación es: " + codigoVerificacion);
 
             javaMailSender.send(mensaje);
+            System.out.println("Correo enviado a: " + destinatario);
         } catch (MessagingException e) {
             e.printStackTrace();
+            System.err.println("Error al enviar el correo: " + e.getMessage());
         }
     }
 }
