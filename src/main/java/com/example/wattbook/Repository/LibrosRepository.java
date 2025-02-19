@@ -2,6 +2,7 @@ package com.example.wattbook.Repository;
 
 import com.example.wattbook.Dto.LibroDTO;
 import com.example.wattbook.Entity.Libros;
+import com.example.wattbook.Enums.Genero;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
@@ -34,6 +35,8 @@ public interface LibrosRepository extends JpaRepository<Libros, Long>, JpaSpecif
             " GROUP BY l.id, l.nombre, l.descripcion, l.generos, l.imagen, l.autorId.id,a.username " +
             "ORDER BY SUM(CASE WHEN v.tipoVoto = true THEN 1 ELSE 0 END ) DESC")
     List<LibroDTO> obtenerLibrosYVotosporidauthor(@Param("idAutor")Long idAutor);
+
+    List<Libros> findByGeneros(Genero genero);
 
 
 }

@@ -79,4 +79,9 @@ public class LibrosController {
     public List<LibroDTO> obtenerLibrosPefil(@PathVariable Long id){
        return libroService.obetenerLibrosPerfil(id);
     }
+
+    @GetMapping("/genero/{genero}")
+    public List<LibroLeerDto> obtenerLibrosPorGenero(@PathVariable Genero genero) {
+        return libroService.obtenerLibrosPorGenero(genero);
+    }
 }
