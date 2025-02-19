@@ -16,7 +16,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "https://frontend-932v.onrender.com")
 @Controller
 @RequestMapping("/comentarios")
 @RequiredArgsConstructor
