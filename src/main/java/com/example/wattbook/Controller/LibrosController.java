@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "https://wattbook.onrender.com")
+@CrossOrigin(origins = "https://wattbook-5pt2.onrender.com")
 @RestController
 @RequestMapping("/libros")
 public class LibrosController {
