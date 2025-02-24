@@ -22,6 +22,6 @@ RUN ./mvnw clean package -DskipTests
 # Verifica que el JAR se haya generado
 RUN ls -l target/
 # Expone el puerto 8080
-EXPOSE 8080
+EXPOSE 8081
 # Ejecuta la aplicación
 CMD ["java", "-jar", "target/WattBook-0.0.1-SNAPSHOT.jar"]
